@@ -101,3 +101,33 @@ h1, h2, h3, p, span, button, li {
   width: 0;
   height: 0;
 }
+
+/* Карта на экране ответа выезжает снизу. Больше на этом экране ничего не движется. */
+@keyframes map-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Leaflet рисует свои подписи своим шрифтом — возвращаем интерфейсный. */
+.leaflet-container {
+  font-family: var(--font-ui);
+  background: #eaf1f4;
+}
+
+.leaflet-control-attribution {
+  font-size: 10px;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

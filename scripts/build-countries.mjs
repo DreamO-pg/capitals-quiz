@@ -379,6 +379,9 @@ export const BY_CODE: Record<string, Country> = Object.fromEntries(
 
   await writeFile(OUT, header);
   await copyFlags(out.map((c) => c.code));
+  // Тот же набор в JSON: его читает build-shapes.mjs. Разбирать .ts регулярками
+  // нельзя — в названиях есть экранированные апострофы («Кот-д'Ивуар»).
+  await writeFile(join(CACHE, 'countries.json'), JSON.stringify(out));
 
   const byRegion = {};
   const byTier = {};

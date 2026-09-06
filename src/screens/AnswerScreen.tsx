@@ -1,5 +1,6 @@
 import type { CSSProperties } from 'react';
 import { Flag } from '../components/Flag';
+import { MapCard } from '../components/MapCard';
 import { Screen } from '../components/Screen';
 import { contextLine } from '../engine/context';
 import type { Game } from '../hooks/useGame';
@@ -46,7 +47,9 @@ export function AnswerScreen({ game }: { game: Game }) {
         </div>
       ) : null}
 
-      {/* Карта встанет сюда на этапе 5, между вердиктом и строкой контекста. */}
+      <div style={mapSlot}>
+        <MapCard country={country} wrong={correct ? null : question.optionCountries[a.chosenIndex]} />
+      </div>
 
       <div style={context}>{contextLine(country)}</div>
 
@@ -117,6 +120,12 @@ const chosenRow: CSSProperties = {
   fontSize: 15,
   color: 'var(--c-ink2)',
   marginTop: 12,
+};
+
+const mapSlot: CSSProperties = {
+  marginTop: 20,
+  // Карта выезжает снизу — единственное движение на этом экране.
+  animation: 'map-in 220ms cubic-bezier(.2,.7,.3,1) both',
 };
 
 const context: CSSProperties = {
