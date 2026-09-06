@@ -46,7 +46,10 @@ export function QuestionScreen({ game }: { game: Game }) {
     <Screen>
       <RoundProgress current={game.position.current} total={game.position.total} />
 
-      <div style={prompt}>{PROMPT[q.mode]}</div>
+      {/* Ключ по номеру вопроса: смена вопроса должна перезапускать появление,
+          иначе два подряд вопроса об одной стране визуально сливаются. */}
+      <div key={game.position.current} style={appear}>
+        <div style={prompt}>{PROMPT[q.mode]}</div>
 
       <div style={{ marginTop: 18 }}>
         {q.mode === 'flag_to_country' ? (
@@ -58,6 +61,7 @@ export function QuestionScreen({ game }: { game: Game }) {
             <div style={subtitle}>{subjectEn}</div>
           </>
         )}
+        </div>
       </div>
 
       {q.mode === 'country_to_map' ? (
@@ -149,6 +153,10 @@ const LOOK: Record<OptionState, { background: string; border: string; color: str
     border: 'var(--c-line)',
     color: 'var(--c-ink-disabled)',
   },
+};
+
+const appear: CSSProperties = {
+  animation: 'question-in 180ms ease-out both',
 };
 
 const prompt: CSSProperties = {

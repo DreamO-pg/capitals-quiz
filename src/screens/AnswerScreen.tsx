@@ -3,6 +3,7 @@ import { Flag } from '../components/Flag';
 import { MapCard } from '../components/MapCard';
 import { Screen } from '../components/Screen';
 import { contextLine } from '../engine/context';
+import { haptic } from '../telegram/webapp';
 import type { Game } from '../hooks/useGame';
 
 export function AnswerScreen({ game }: { game: Game }) {
@@ -14,7 +15,13 @@ export function AnswerScreen({ game }: { game: Game }) {
   return (
     <Screen
       footer={
-        <button style={primary} onClick={game.next}>
+        <button
+          style={primary}
+          onClick={() => {
+            haptic.impact('light');
+            game.next();
+          }}
+        >
           Дальше
         </button>
       }

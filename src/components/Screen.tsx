@@ -39,22 +39,19 @@ const footerBar: CSSProperties = {
   borderTop: '1px solid var(--c-line)',
 };
 
-/** Заглушка на время сборки каркаса. Уйдёт по мере наполнения экранов. */
-export function Placeholder({ title, hint }: { title: string; hint: string }) {
+/** Заголовок экрана. Literata 32, единый для всех экранов кроме вопроса. */
+export function ScreenTitle({ children }: { children: ReactNode }) {
   return (
-    <div>
-      <h1
-        style={{
-          fontFamily: 'var(--font-display)',
-          fontSize: 32,
-          fontWeight: 500,
-          lineHeight: 1.1,
-          margin: '0 0 8px',
-        }}
-      >
-        {title}
-      </h1>
-      <p style={{ margin: 0, fontSize: 13, color: 'var(--c-muted)' }}>{hint}</p>
-    </div>
+    <h1
+      style={{
+        fontFamily: 'var(--font-display)',
+        fontSize: 32,
+        fontWeight: 500,
+        lineHeight: 1.1,
+        margin: 0,
+      }}
+    >
+      {children}
+    </h1>
   );
 }

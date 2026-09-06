@@ -1,6 +1,8 @@
 import type { CSSProperties } from 'react';
-import { Placeholder, Screen } from '../components/Screen';
+import { Screen, ScreenTitle } from '../components/Screen';
 import { haptic } from '../telegram/webapp';
+import { IconPlus } from '../components/icons';
+import { useHomeScreen } from '../hooks/useHomeScreen';
 import { MODE_LABEL, REGION_LABEL } from '../types';
 import type { Difficulty, Mode, RegionFilter } from '../types';
 import type { Game } from '../hooks/useGame';
@@ -21,6 +23,8 @@ const DIFFICULTIES: [Difficulty, string][] = [
 export function HomeScreen({ game, openStats }: { game: Game; openStats: () => void }) {
   const { settings, stats } = game;
   const accuracy = stats.answers > 0 ? Math.round((100 * stats.correct) / stats.answers) : 0;
+  const learned = [...game.progress.values()].filter((c) => c.box >= 4).length;
+  const home = useHomeScreen();
 
   const pick = <T,>(value: T, apply: (v: T) => void) => () => {
     haptic.selection();
@@ -48,7 +52,35 @@ export function HomeScreen({ game, openStats }: { game: Game; openStats: () => v
         </div>
       }
     >
-      <Placeholder title="Столицы" hint={`Точность ${accuracy}% · серия ${stats.streak}`} />
+      <ScreenTitle>Столицы</ScreenTitle>
+
+      {stats.answers > 0 ? (
+        <div style={summary}>
+          <Stat value={`${accuracy}%`} caption="точность" />
+          <Stat value={String(stats.streak)} caption="серия" warm={stats.streak >= 3} />
+          <Stat value={String(learned)} caption="выучено" />
+        </div>
+      ) : (
+        <p style={intro}>
+          195 стран, четыре режима. Раунд — десять вопросов, ошибки возвращаются чаще
+          верных ответов.
+        </p>
+      )}
+
+      {home.canOffer ? (
+        <button
+          style={homeRow}
+          onClick={() => {
+            haptic.impact('light');
+            home.add();
+          }}
+        >
+          <span style={{ display: 'flex', color: 'var(--c-accent)' }}>
+            <IconPlus size={20} />
+          </span>
+          Добавить на экран «Домой»
+        </button>
+      ) : null}
 
       <Section title="Режим">
         {MODES.map((m) => (
@@ -94,6 +126,15 @@ export function HomeScreen({ game, openStats }: { game: Game; openStats: () => v
   );
 }
 
+function Stat({ value, caption, warm }: { value: string; caption: string; warm?: boolean }) {
+  return (
+    <div style={statBox}>
+      <div style={{ ...statValue, color: warm ? 'var(--c-warm)' : 'var(--c-ink)' }}>{value}</div>
+      <div style={statCaption}>{caption}</div>
+    </div>
+  );
+}
+
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div style={{ marginTop: 24 }}>
@@ -129,6 +170,58 @@ function Chip({
     </button>
   );
 }
+
+const summary: CSSProperties = {
+  display: 'grid',
+  gridTemplateColumns: '1fr 1fr 1fr',
+  gap: 8,
+  marginTop: 18,
+};
+
+const statBox: CSSProperties = {
+  background: 'var(--c-surface)',
+  border: '1px solid var(--c-line)',
+  borderRadius: 'var(--r-card)',
+  padding: '12px 10px',
+  textAlign: 'center',
+};
+
+const statValue: CSSProperties = {
+  fontFamily: 'var(--font-display)',
+  fontSize: 26,
+  fontWeight: 500,
+  lineHeight: 1.1,
+};
+
+const statCaption: CSSProperties = {
+  fontSize: 13,
+  color: 'var(--c-muted)',
+  marginTop: 2,
+  whiteSpace: 'nowrap',
+};
+
+const intro: CSSProperties = {
+  fontSize: 15,
+  color: 'var(--c-ink2)',
+  lineHeight: 1.45,
+  margin: '12px 0 0',
+};
+
+const homeRow: CSSProperties = {
+  display: 'flex',
+  alignItems: 'center',
+  gap: 8,
+  width: '100%',
+  marginTop: 16,
+  padding: '12px 14px',
+  background: 'var(--c-accent-bg)',
+  border: 'none',
+  borderRadius: 'var(--r-row)',
+  fontSize: 15,
+  fontWeight: 600,
+  color: 'var(--c-ink)',
+  textAlign: 'left',
+};
 
 const label: CSSProperties = {
   fontSize: 11,
