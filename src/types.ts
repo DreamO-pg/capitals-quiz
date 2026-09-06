@@ -42,6 +42,8 @@ export interface Country {
   neighborsRu: string[]; // сухопутные соседи
   seaRu?: string; // "Атлантический океан"
   region: Region;
+  /** Подрегион по-русски: «Западная Европа». Идёт в строку контекста под картой. */
+  subregionRu: string;
   tier: Tier;
   note?: string; // "Парламент заседает в Гааге, но столица — Амстердам"
 }

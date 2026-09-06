@@ -1,12 +1,14 @@
 import type { CSSProperties } from 'react';
+import { Flag } from '../components/Flag';
 import { Screen } from '../components/Screen';
+import { contextLine } from '../engine/context';
 import type { Game } from '../hooks/useGame';
 
-/** Временная разметка этапа 3. Вердикт, карта и пояснение — этапы 4–5. */
 export function AnswerScreen({ game }: { game: Game }) {
   const a = game.lastAnswer;
   if (!a) return null;
   const { question, correct } = a;
+  const country = question.country;
 
   return (
     <Screen
@@ -16,31 +18,121 @@ export function AnswerScreen({ game }: { game: Game }) {
         </button>
       }
     >
-      <div style={{ ...verdict, color: correct ? 'var(--c-ok)' : 'var(--c-bad)' }}>
-        {correct ? 'Верно' : 'Неверно'}
+      <div style={verdictRow}>
+        <Flag code={country.code} size="md" />
+        <span style={{ ...verdict, color: correct ? 'var(--c-ok)' : 'var(--c-bad)' }}>
+          {correct ? 'Верно' : 'Неверно'}
+        </span>
       </div>
-      <div style={{ fontSize: 17, marginTop: 8 }}>
-        {question.country.nameRu} — {question.country.capitalRu}
+
+      <div style={card}>
+        <div style={pairRow}>
+          <span style={pairLabel}>Страна</span>
+          <span style={pairValue}>{country.nameRu}</span>
+        </div>
+        <div style={divider} />
+        <div style={pairRow}>
+          <span style={pairLabel}>Столица</span>
+          <span style={pairValue}>{country.capitalRu}</span>
+        </div>
+        <div style={latin}>
+          {country.nameEn} — {country.capitalEn}
+        </div>
       </div>
+
       {!correct ? (
-        <div style={{ fontSize: 15, color: 'var(--c-ink2)', marginTop: 4 }}>
-          Ты выбрал: {question.options[a.chosenIndex]}
+        <div style={chosenRow}>
+          Ты выбрал <b style={{ fontWeight: 600 }}>{question.options[a.chosenIndex]}</b>
         </div>
       ) : null}
-      {question.country.note ? (
-        <p style={{ fontSize: 15, color: 'var(--c-ink2)', marginTop: 16 }}>
-          {question.country.note}
-        </p>
-      ) : null}
+
+      {/* Карта встанет сюда на этапе 5, между вердиктом и строкой контекста. */}
+
+      <div style={context}>{contextLine(country)}</div>
+
+      {country.note ? <p style={note}>{country.note}</p> : null}
     </Screen>
   );
 }
+
+const verdictRow: CSSProperties = {
+  display: 'flex',
+  alignItems: 'center',
+  gap: 12,
+  marginTop: 8,
+};
 
 const verdict: CSSProperties = {
   fontFamily: 'var(--font-display)',
   fontSize: 25,
   lineHeight: 1.2,
   fontWeight: 500,
+};
+
+const card: CSSProperties = {
+  marginTop: 20,
+  background: 'var(--c-surface)',
+  border: '1px solid var(--c-line)',
+  borderRadius: 'var(--r-card)',
+  padding: 16,
+};
+
+const pairRow: CSSProperties = {
+  display: 'flex',
+  alignItems: 'baseline',
+  justifyContent: 'space-between',
+  gap: 16,
+};
+
+const pairLabel: CSSProperties = {
+  fontSize: 11,
+  fontWeight: 600,
+  letterSpacing: '.1em',
+  textTransform: 'uppercase',
+  color: 'var(--c-muted)',
+  flex: '0 0 auto',
+};
+
+const pairValue: CSSProperties = {
+  fontFamily: 'var(--font-display)',
+  fontSize: 26,
+  fontWeight: 500,
+  lineHeight: 1.15,
+  textAlign: 'right',
+};
+
+const divider: CSSProperties = {
+  height: 1,
+  background: 'var(--c-line)',
+  margin: '12px 0',
+};
+
+const latin: CSSProperties = {
+  fontSize: 13,
+  color: 'var(--c-muted)',
+  marginTop: 12,
+};
+
+const chosenRow: CSSProperties = {
+  fontSize: 15,
+  color: 'var(--c-ink2)',
+  marginTop: 12,
+};
+
+const context: CSSProperties = {
+  fontSize: 15,
+  color: 'var(--c-ink2)',
+  marginTop: 20,
+  lineHeight: 1.4,
+};
+
+const note: CSSProperties = {
+  fontSize: 15,
+  color: 'var(--c-ink2)',
+  lineHeight: 1.45,
+  margin: '12px 0 0',
+  paddingTop: 12,
+  borderTop: '1px solid var(--c-line)',
 };
 
 const primary: CSSProperties = {

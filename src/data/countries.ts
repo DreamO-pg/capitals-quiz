@@ -21,6 +21,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: [],
     seaRu: 'Индийский и Тихий океаны',
     region: 'oceania',
+    subregionRu: 'Австралия и Новая Зеландия',
     tier: 'easy',
     note: 'Канберру построили как компромисс между Сиднеем и Мельбурном.',
   },
@@ -35,6 +36,7 @@ export const COUNTRIES: Country[] = [
     bbox: [9.521, 46.379, 17.148, 49.01],
     neighborsRu: ['Венгрия', 'Германия', 'Италия', 'Лихтенштейн', 'Словакия', 'Словения', 'Чехия', 'Швейцария'],
     region: 'europe',
+    subregionRu: 'Центральная Европа',
     tier: 'easy',
   },
   {
@@ -49,6 +51,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Армения', 'Грузия', 'Иран', 'Россия', 'Турция'],
     seaRu: 'Каспийское море',
     region: 'asia',
+    subregionRu: 'Передняя Азия',
     tier: 'easy',
   },
   {
@@ -63,6 +66,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Греция', 'Республика Косово', 'Северная Македония', 'Черногория'],
     seaRu: 'Адриатическое море',
     region: 'europe',
+    subregionRu: 'Юго-Восточная Европа',
     tier: 'medium',
   },
   {
@@ -77,6 +81,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Западная Сахара', 'Ливия', 'Мавритания', 'Мали', 'Марокко', 'Нигер', 'Тунис'],
     seaRu: 'Средиземное море',
     region: 'africa',
+    subregionRu: 'Северная Африка',
     tier: 'easy',
   },
   {
@@ -91,6 +96,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['ДР Конго', 'Замбия', 'Намибия', 'Республика Конго'],
     seaRu: 'Атлантический океан',
     region: 'africa',
+    subregionRu: 'Центральная Африка',
     tier: 'medium',
   },
   {
@@ -104,6 +110,7 @@ export const COUNTRIES: Country[] = [
     bbox: [1.406, 42.429, 1.765, 42.649],
     neighborsRu: ['Испания', 'Франция'],
     region: 'europe',
+    subregionRu: 'Южная Европа',
     tier: 'hard',
   },
   {
@@ -118,6 +125,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: [],
     seaRu: 'Карибское море',
     region: 'americas',
+    subregionRu: 'Карибы',
     tier: 'hard',
   },
   {
@@ -132,6 +140,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Боливия', 'Бразилия', 'Парагвай', 'Уругвай', 'Чили'],
     seaRu: 'Атлантический океан',
     region: 'americas',
+    subregionRu: 'Южная Америка',
     tier: 'easy',
   },
   {
@@ -145,6 +154,7 @@ export const COUNTRIES: Country[] = [
     bbox: [43.436, 38.864, 46.603, 41.29],
     neighborsRu: ['Азербайджан', 'Грузия', 'Иран', 'Турция'],
     region: 'asia',
+    subregionRu: 'Передняя Азия',
     tier: 'easy',
   },
   {
@@ -158,6 +168,7 @@ export const COUNTRIES: Country[] = [
     bbox: [60.487, 29.387, 74.892, 38.474],
     neighborsRu: ['Иран', 'Китай', 'Пакистан', 'Таджикистан', 'Туркменистан', 'Узбекистан'],
     region: 'asia',
+    subregionRu: 'Южная Азия',
     tier: 'easy',
   },
   {
@@ -172,6 +183,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: [],
     seaRu: 'Атлантический океан',
     region: 'americas',
+    subregionRu: 'Карибы',
     tier: 'medium',
   },
   {
@@ -186,6 +198,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Индия', 'Мьянма'],
     seaRu: 'Бенгальский залив',
     region: 'asia',
+    subregionRu: 'Южная Азия',
     tier: 'medium',
   },
   {
@@ -200,6 +213,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: [],
     seaRu: 'Атлантический океан',
     region: 'americas',
+    subregionRu: 'Карибы',
     tier: 'hard',
   },
   {
@@ -214,6 +228,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: [],
     seaRu: 'Персидский залив',
     region: 'asia',
+    subregionRu: 'Передняя Азия',
     tier: 'medium',
   },
   {
@@ -227,6 +242,7 @@ export const COUNTRIES: Country[] = [
     bbox: [23.166, 51.235, 32.72, 56.157],
     neighborsRu: ['Латвия', 'Литва', 'Польша', 'Россия', 'Украина'],
     region: 'europe',
+    subregionRu: 'Восточная Европа',
     tier: 'easy',
     note: 'Минск стоит на Свислочи, в центре страны.',
   },
@@ -242,6 +258,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Гватемала', 'Мексика'],
     seaRu: 'Карибское море',
     region: 'americas',
+    subregionRu: 'Центральная Америка',
     tier: 'hard',
     note: 'Бельмопан построен вглубь суши после урагана, разрушившего Белиз-Сити.',
   },
@@ -257,6 +274,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Германия', 'Люксембург', 'Нидерланды', 'Франция'],
     seaRu: 'Северное море',
     region: 'europe',
+    subregionRu: 'Западная Европа',
     tier: 'easy',
   },
   {
@@ -271,6 +289,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Буркина-Фасо', 'Нигер', 'Нигерия', 'Того'],
     seaRu: 'Гвинейский залив',
     region: 'africa',
+    subregionRu: 'Западная Африка',
     tier: 'hard',
     note: 'Порто-Ново — официальная столица, правительство работает в Котону.',
   },
@@ -286,6 +305,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Греция', 'Румыния', 'Северная Македония', 'Сербия', 'Турция'],
     seaRu: 'Чёрное море',
     region: 'europe',
+    subregionRu: 'Юго-Восточная Европа',
     tier: 'easy',
   },
   {
@@ -299,6 +319,7 @@ export const COUNTRIES: Country[] = [
     bbox: [-69.666, -22.897, -57.466, -9.68],
     neighborsRu: ['Аргентина', 'Бразилия', 'Парагвай', 'Перу', 'Чили'],
     region: 'americas',
+    subregionRu: 'Южная Америка',
     tier: 'medium',
     note: 'Сукре — официальная столица, но правительство и парламент сидят в Ла-Пасе.',
   },
@@ -314,6 +335,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Сербия', 'Хорватия', 'Черногория'],
     seaRu: 'Адриатическое море',
     region: 'europe',
+    subregionRu: 'Юго-Восточная Европа',
     tier: 'medium',
   },
   {
@@ -327,6 +349,7 @@ export const COUNTRIES: Country[] = [
     bbox: [19.978, -26.892, 29.35, -17.782],
     neighborsRu: ['Замбия', 'Зимбабве', 'Намибия', 'Южно-Африканская Республика'],
     region: 'africa',
+    subregionRu: 'Южная Африка',
     tier: 'hard',
   },
   {
@@ -341,6 +364,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Аргентина', 'Боливия', 'Венесуэла', 'Гайана', 'Колумбия', 'Парагвай', 'Перу', 'Суринам', 'Уругвай', 'Французская Гвиана'],
     seaRu: 'Атлантический океан',
     region: 'americas',
+    subregionRu: 'Южная Америка',
     tier: 'easy',
     note: 'Бразилиа построена с нуля в 1960 году, до неё столицей был Рио-де-Жанейро.',
   },
@@ -356,6 +380,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Малайзия'],
     seaRu: 'Южно-Китайское море',
     region: 'asia',
+    subregionRu: 'Юго-Восточная Азия',
     tier: 'hard',
     note: 'Полное название столицы — Бандар-Сери-Бегаван, до 1970 года просто Бруней.',
   },
@@ -370,6 +395,7 @@ export const COUNTRIES: Country[] = [
     bbox: [-5.523, 9.392, 2.39, 15.08],
     neighborsRu: ['Бенин', 'Гана', 'Кот-д\'Ивуар', 'Мали', 'Нигер', 'Того'],
     region: 'africa',
+    subregionRu: 'Западная Африка',
     tier: 'hard',
   },
   {
@@ -383,6 +409,7 @@ export const COUNTRIES: Country[] = [
     bbox: [28.987, -4.463, 30.834, -2.303],
     neighborsRu: ['ДР Конго', 'Руанда', 'Танзания'],
     region: 'africa',
+    subregionRu: 'Восточная Африка',
     tier: 'hard',
   },
   {
@@ -396,6 +423,7 @@ export const COUNTRIES: Country[] = [
     bbox: [88.73, 26.696, 92.089, 28.358],
     neighborsRu: ['Индия', 'Китай'],
     region: 'asia',
+    subregionRu: 'Южная Азия',
     tier: 'hard',
   },
   {
@@ -410,6 +438,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: [],
     seaRu: 'Тихий океан',
     region: 'oceania',
+    subregionRu: 'Меланезия',
     tier: 'hard',
     note: 'Порт-Вила стоит на острове Эфате, одном из восьмидесяти с лишним.',
   },
@@ -424,6 +453,7 @@ export const COUNTRIES: Country[] = [
     bbox: [12.453, 41.903, 12.454, 41.904],
     neighborsRu: ['Италия'],
     region: 'europe',
+    subregionRu: 'Южная Европа',
     tier: 'easy',
     note: 'Самое маленькое государство мира: город и страна — одно и то же.',
   },
@@ -439,6 +469,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Ирландия'],
     seaRu: 'Атлантический океан',
     region: 'europe',
+    subregionRu: 'Северная Европа',
     tier: 'easy',
   },
   {
@@ -452,6 +483,7 @@ export const COUNTRIES: Country[] = [
     bbox: [16.094, 45.741, 22.878, 48.569],
     neighborsRu: ['Австрия', 'Румыния', 'Сербия', 'Словакия', 'Словения', 'Украина', 'Хорватия'],
     region: 'europe',
+    subregionRu: 'Центральная Европа',
     tier: 'easy',
   },
   {
@@ -466,6 +498,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Бразилия', 'Гайана', 'Колумбия'],
     seaRu: 'Карибское море',
     region: 'americas',
+    subregionRu: 'Южная Америка',
     tier: 'easy',
   },
   {
@@ -480,6 +513,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Индонезия'],
     seaRu: 'Тиморское море',
     region: 'asia',
+    subregionRu: 'Юго-Восточная Азия',
     tier: 'hard',
   },
   {
@@ -494,6 +528,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Камбоджа', 'Китай', 'Лаос'],
     seaRu: 'Южно-Китайское море',
     region: 'asia',
+    subregionRu: 'Юго-Восточная Азия',
     tier: 'easy',
     note: 'Ханой — столица, а крупнейший город — Хошимин, бывший Сайгон.',
   },
@@ -509,6 +544,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Камерун', 'Республика Конго', 'Экваториальная Гвинея'],
     seaRu: 'Гвинейский залив',
     region: 'africa',
+    subregionRu: 'Центральная Африка',
     tier: 'hard',
   },
   {
@@ -523,6 +559,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Доминиканская Республика'],
     seaRu: 'Карибское море',
     region: 'americas',
+    subregionRu: 'Карибы',
     tier: 'medium',
   },
   {
@@ -537,6 +574,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Бразилия', 'Венесуэла', 'Суринам'],
     seaRu: 'Атлантический океан',
     region: 'americas',
+    subregionRu: 'Южная Америка',
     tier: 'hard',
   },
   {
@@ -551,6 +589,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Сенегал'],
     seaRu: 'Атлантический океан',
     region: 'africa',
+    subregionRu: 'Западная Африка',
     tier: 'hard',
   },
   {
@@ -565,6 +604,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Буркина-Фасо', 'Кот-д\'Ивуар', 'Того'],
     seaRu: 'Гвинейский залив',
     region: 'africa',
+    subregionRu: 'Западная Африка',
     tier: 'medium',
   },
   {
@@ -579,6 +619,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Белиз', 'Гондурас', 'Мексика', 'Сальвадор'],
     seaRu: 'Тихий океан и Карибское море',
     region: 'americas',
+    subregionRu: 'Центральная Америка',
     tier: 'medium',
   },
   {
@@ -593,6 +634,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Гвинея-Бисау', 'Кот-д\'Ивуар', 'Либерия', 'Мали', 'Сенегал', 'Сьерра-Леоне'],
     seaRu: 'Атлантический океан',
     region: 'africa',
+    subregionRu: 'Западная Африка',
     tier: 'hard',
   },
   {
@@ -607,6 +649,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Гвинея', 'Сенегал'],
     seaRu: 'Атлантический океан',
     region: 'africa',
+    subregionRu: 'Западная Африка',
     tier: 'hard',
   },
   {
@@ -621,6 +664,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Австрия', 'Бельгия', 'Дания', 'Люксембург', 'Нидерланды', 'Польша', 'Франция', 'Чехия', 'Швейцария'],
     seaRu: 'Балтийское и Северное моря',
     region: 'europe',
+    subregionRu: 'Западная Европа',
     tier: 'easy',
   },
   {
@@ -635,6 +679,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Гватемала', 'Никарагуа', 'Сальвадор'],
     seaRu: 'Карибское море и Тихий океан',
     region: 'americas',
+    subregionRu: 'Центральная Америка',
     tier: 'medium',
   },
   {
@@ -649,6 +694,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: [],
     seaRu: 'Карибское море',
     region: 'americas',
+    subregionRu: 'Карибы',
     tier: 'hard',
   },
   {
@@ -663,6 +709,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Албания', 'Болгария', 'Северная Македония', 'Турция'],
     seaRu: 'Средиземное и Эгейское моря',
     region: 'europe',
+    subregionRu: 'Южная Европа',
     tier: 'easy',
   },
   {
@@ -677,6 +724,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Азербайджан', 'Армения', 'Россия', 'Турция'],
     seaRu: 'Чёрное море',
     region: 'asia',
+    subregionRu: 'Передняя Азия',
     tier: 'easy',
   },
   {
@@ -691,6 +739,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Германия'],
     seaRu: 'Балтийское и Северное моря',
     region: 'europe',
+    subregionRu: 'Северная Европа',
     tier: 'easy',
   },
   {
@@ -705,6 +754,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Сомали', 'Эритрея', 'Эфиопия'],
     seaRu: 'Аденский залив',
     region: 'africa',
+    subregionRu: 'Восточная Африка',
     tier: 'hard',
   },
   {
@@ -719,6 +769,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: [],
     seaRu: 'Карибское море',
     region: 'americas',
+    subregionRu: 'Карибы',
     tier: 'hard',
   },
   {
@@ -733,6 +784,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Гаити'],
     seaRu: 'Карибское море',
     region: 'americas',
+    subregionRu: 'Карибы',
     tier: 'medium',
   },
   {
@@ -747,6 +799,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Ангола', 'Бурунди', 'Замбия', 'Республика Конго', 'Руанда', 'Танзания', 'Уганда', 'ЦАР', 'Южный Судан'],
     seaRu: 'Атлантический океан',
     region: 'africa',
+    subregionRu: 'Центральная Африка',
     tier: 'medium',
   },
   {
@@ -761,6 +814,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Израиль', 'Ливия', 'Палестина', 'Судан'],
     seaRu: 'Средиземное и Красное моря',
     region: 'africa',
+    subregionRu: 'Северная Африка',
     tier: 'easy',
     note: 'Правительство постепенно переезжает в Новую административную столицу под Каиром.',
   },
@@ -775,6 +829,7 @@ export const COUNTRIES: Country[] = [
     bbox: [21.98, -18.069, 33.674, -8.194],
     neighborsRu: ['Ангола', 'Ботсвана', 'ДР Конго', 'Зимбабве', 'Малави', 'Мозамбик', 'Намибия', 'Танзания'],
     region: 'africa',
+    subregionRu: 'Восточная Африка',
     tier: 'medium',
   },
   {
@@ -788,6 +843,7 @@ export const COUNTRIES: Country[] = [
     bbox: [25.219, -22.397, 33.043, -15.615],
     neighborsRu: ['Ботсвана', 'Замбия', 'Мозамбик', 'Южно-Африканская Республика'],
     region: 'africa',
+    subregionRu: 'Восточная Африка',
     tier: 'medium',
   },
   {
@@ -802,6 +858,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Египет', 'Иордания', 'Ливан', 'Палестина', 'Сирия'],
     seaRu: 'Средиземное море',
     region: 'asia',
+    subregionRu: 'Передняя Азия',
     tier: 'easy',
     note: 'Иерусалим объявлен столицей Израилем; большинство посольств работает в Тель-Авиве.',
   },
@@ -817,6 +874,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Бангладеш', 'Бутан', 'Китай', 'Мьянма', 'Непал', 'Пакистан'],
     seaRu: 'Индийский океан',
     region: 'asia',
+    subregionRu: 'Южная Азия',
     tier: 'easy',
     note: 'Нью-Дели — отдельный район внутри Дели, построенный британцами.',
   },
@@ -832,6 +890,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Восточный Тимор', 'Малайзия', 'Папуа — Новая Гвинея'],
     seaRu: 'Индийский и Тихий океаны',
     region: 'asia',
+    subregionRu: 'Юго-Восточная Азия',
     tier: 'easy',
     note: 'Столицу переносят в Нусантару на Калимантане, но пока это Джакарта.',
   },
@@ -847,6 +906,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Израиль', 'Ирак', 'Палестина', 'Саудовская Аравия', 'Сирия'],
     seaRu: 'Красное море',
     region: 'asia',
+    subregionRu: 'Передняя Азия',
     tier: 'medium',
   },
   {
@@ -861,6 +921,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Иордания', 'Иран', 'Кувейт', 'Саудовская Аравия', 'Сирия', 'Турция'],
     seaRu: 'Персидский залив',
     region: 'asia',
+    subregionRu: 'Передняя Азия',
     tier: 'easy',
   },
   {
@@ -875,6 +936,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Азербайджан', 'Армения', 'Афганистан', 'Ирак', 'Пакистан', 'Туркменистан', 'Турция'],
     seaRu: 'Каспийское море и Персидский залив',
     region: 'asia',
+    subregionRu: 'Южная Азия',
     tier: 'easy',
   },
   {
@@ -889,6 +951,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Великобритания'],
     seaRu: 'Атлантический океан',
     region: 'europe',
+    subregionRu: 'Северная Европа',
     tier: 'easy',
   },
   {
@@ -903,6 +966,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: [],
     seaRu: 'Атлантический океан',
     region: 'europe',
+    subregionRu: 'Северная Европа',
     tier: 'easy',
   },
   {
@@ -917,6 +981,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Андорра', 'Гибралтар', 'Марокко', 'Португалия', 'Франция'],
     seaRu: 'Атлантика и Средиземное море',
     region: 'europe',
+    subregionRu: 'Южная Европа',
     tier: 'easy',
   },
   {
@@ -931,6 +996,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Австрия', 'Ватикан', 'Сан-Марино', 'Словения', 'Франция', 'Швейцария'],
     seaRu: 'Средиземное море',
     region: 'europe',
+    subregionRu: 'Южная Европа',
     tier: 'easy',
   },
   {
@@ -945,6 +1011,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Оман', 'Саудовская Аравия'],
     seaRu: 'Красное и Аравийское моря',
     region: 'asia',
+    subregionRu: 'Передняя Азия',
     tier: 'medium',
     note: 'Сана контролируется хуситами, правительство работает из Адена.',
   },
@@ -960,6 +1027,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: [],
     seaRu: 'Атлантический океан',
     region: 'africa',
+    subregionRu: 'Западная Африка',
     tier: 'hard',
   },
   {
@@ -974,6 +1042,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Киргизия', 'Китай', 'Россия', 'Туркменистан', 'Узбекистан'],
     seaRu: 'Каспийское море',
     region: 'asia',
+    subregionRu: 'Средняя Азия',
     tier: 'easy',
     note: 'Город переименовывали: Акмола, Астана, Нур-Султан и снова Астана с 2022 года.',
   },
@@ -989,6 +1058,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Вьетнам', 'Лаос', 'Таиланд'],
     seaRu: 'Сиамский залив',
     region: 'asia',
+    subregionRu: 'Юго-Восточная Азия',
     tier: 'medium',
     note: 'Пномпень стоит на слиянии Меконга и Тонлесапа.',
   },
@@ -1004,6 +1074,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Габон', 'Нигерия', 'Республика Конго', 'ЦАР', 'Чад', 'Экваториальная Гвинея'],
     seaRu: 'Гвинейский залив',
     region: 'africa',
+    subregionRu: 'Центральная Африка',
     tier: 'medium',
   },
   {
@@ -1018,6 +1089,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['США'],
     seaRu: 'три океана, включая Северный Ледовитый',
     region: 'americas',
+    subregionRu: 'Северная Америка',
     tier: 'easy',
     note: 'Оттава выбрана королевой Викторией как компромисс между Монреалем и Торонто.',
   },
@@ -1033,6 +1105,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Саудовская Аравия'],
     seaRu: 'Персидский залив',
     region: 'asia',
+    subregionRu: 'Передняя Азия',
     tier: 'medium',
   },
   {
@@ -1047,6 +1120,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Сомали', 'Танзания', 'Уганда', 'Эфиопия', 'Южный Судан'],
     seaRu: 'Индийский океан',
     region: 'africa',
+    subregionRu: 'Восточная Африка',
     tier: 'easy',
   },
   {
@@ -1061,6 +1135,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: [],
     seaRu: 'Средиземное море',
     region: 'europe',
+    subregionRu: 'Южная Европа',
     tier: 'medium',
   },
   {
@@ -1074,6 +1149,7 @@ export const COUNTRIES: Country[] = [
     bbox: [69.226, 39.189, 80.258, 43.262],
     neighborsRu: ['Казахстан', 'Китай', 'Таджикистан', 'Узбекистан'],
     region: 'asia',
+    subregionRu: 'Средняя Азия',
     tier: 'medium',
   },
   {
@@ -1088,6 +1164,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: [],
     seaRu: 'Тихий океан',
     region: 'oceania',
+    subregionRu: 'Микронезия',
     tier: 'hard',
   },
   {
@@ -1102,6 +1179,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Афганистан', 'Бутан', 'Вьетнам', 'Гонконг', 'Индия', 'Казахстан', 'Киргизия', 'Лаос', 'Макао', 'Монголия', 'Мьянма', 'Непал', 'Пакистан', 'Россия', 'Северная Корея', 'Таджикистан'],
     seaRu: 'Жёлтое и Южно-Китайское моря',
     region: 'asia',
+    subregionRu: 'Восточная Азия',
     tier: 'easy',
     note: 'Пекин — «северная столица»; Нанкин, южная, был столицей до 1949 года.',
   },
@@ -1117,6 +1195,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Бразилия', 'Венесуэла', 'Панама', 'Перу', 'Эквадор'],
     seaRu: 'Карибское море и Тихий океан',
     region: 'americas',
+    subregionRu: 'Южная Америка',
     tier: 'easy',
   },
   {
@@ -1131,6 +1210,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: [],
     seaRu: 'Индийский океан',
     region: 'africa',
+    subregionRu: 'Восточная Африка',
     tier: 'hard',
   },
   {
@@ -1145,6 +1225,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Никарагуа', 'Панама'],
     seaRu: 'Карибское море и Тихий океан',
     region: 'americas',
+    subregionRu: 'Центральная Америка',
     tier: 'medium',
   },
   {
@@ -1159,6 +1240,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Буркина-Фасо', 'Гана', 'Гвинея', 'Либерия', 'Мали'],
     seaRu: 'Гвинейский залив',
     region: 'africa',
+    subregionRu: 'Западная Африка',
     tier: 'medium',
     note: 'Ямусукро — официальная столица с 1983 года, фактический центр — Абиджан.',
   },
@@ -1174,6 +1256,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: [],
     seaRu: 'Карибское море',
     region: 'americas',
+    subregionRu: 'Карибы',
     tier: 'easy',
   },
   {
@@ -1188,6 +1271,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Ирак', 'Саудовская Аравия'],
     seaRu: 'Персидский залив',
     region: 'asia',
+    subregionRu: 'Передняя Азия',
     tier: 'medium',
   },
   {
@@ -1201,6 +1285,7 @@ export const COUNTRIES: Country[] = [
     bbox: [100.097, 13.915, 107.664, 22.496],
     neighborsRu: ['Вьетнам', 'Камбоджа', 'Китай', 'Мьянма', 'Таиланд'],
     region: 'asia',
+    subregionRu: 'Юго-Восточная Азия',
     tier: 'medium',
   },
   {
@@ -1215,6 +1300,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Беларусь', 'Литва', 'Россия', 'Эстония'],
     seaRu: 'Балтийское море',
     region: 'europe',
+    subregionRu: 'Северная Европа',
     tier: 'easy',
   },
   {
@@ -1228,6 +1314,7 @@ export const COUNTRIES: Country[] = [
     bbox: [27.002, -30.659, 29.436, -28.571],
     neighborsRu: ['Южно-Африканская Республика'],
     region: 'africa',
+    subregionRu: 'Южная Африка',
     tier: 'hard',
   },
   {
@@ -1242,6 +1329,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Гвинея', 'Кот-д\'Ивуар', 'Сьерра-Леоне'],
     seaRu: 'Атлантический океан',
     region: 'africa',
+    subregionRu: 'Западная Африка',
     tier: 'hard',
   },
   {
@@ -1256,6 +1344,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Израиль', 'Сирия'],
     seaRu: 'Средиземное море',
     region: 'asia',
+    subregionRu: 'Передняя Азия',
     tier: 'medium',
   },
   {
@@ -1270,6 +1359,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Алжир', 'Египет', 'Нигер', 'Судан', 'Тунис', 'Чад'],
     seaRu: 'Средиземное море',
     region: 'africa',
+    subregionRu: 'Северная Африка',
     tier: 'easy',
     note: 'Триполи — столица, но у страны долго было два конкурирующих правительства.',
   },
@@ -1285,6 +1375,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Беларусь', 'Латвия', 'Польша', 'Россия'],
     seaRu: 'Балтийское море',
     region: 'europe',
+    subregionRu: 'Северная Европа',
     tier: 'easy',
   },
   {
@@ -1298,6 +1389,7 @@ export const COUNTRIES: Country[] = [
     bbox: [9.476, 47.052, 9.616, 47.263],
     neighborsRu: ['Австрия', 'Швейцария'],
     region: 'europe',
+    subregionRu: 'Западная Европа',
     tier: 'hard',
   },
   {
@@ -1311,6 +1403,7 @@ export const COUNTRIES: Country[] = [
     bbox: [5.715, 49.441, 6.503, 50.175],
     neighborsRu: ['Бельгия', 'Германия', 'Франция'],
     region: 'europe',
+    subregionRu: 'Западная Европа',
     tier: 'easy',
   },
   {
@@ -1325,6 +1418,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: [],
     seaRu: 'Индийский океан',
     region: 'africa',
+    subregionRu: 'Восточная Африка',
     tier: 'medium',
   },
   {
@@ -1339,6 +1433,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Алжир', 'Западная Сахара', 'Мали', 'Сенегал'],
     seaRu: 'Атлантический океан',
     region: 'africa',
+    subregionRu: 'Западная Африка',
     tier: 'hard',
   },
   {
@@ -1353,6 +1448,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: [],
     seaRu: 'Индийский океан',
     region: 'africa',
+    subregionRu: 'Восточная Африка',
     tier: 'medium',
   },
   {
@@ -1366,6 +1462,7 @@ export const COUNTRIES: Country[] = [
     bbox: [32.663, -17.135, 35.904, -9.381],
     neighborsRu: ['Замбия', 'Мозамбик', 'Танзания'],
     region: 'africa',
+    subregionRu: 'Восточная Африка',
     tier: 'hard',
   },
   {
@@ -1380,6 +1477,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Бруней', 'Индонезия', 'Таиланд'],
     seaRu: 'Южно-Китайское море',
     region: 'asia',
+    subregionRu: 'Юго-Восточная Азия',
     tier: 'easy',
     note: 'Куала-Лумпур — столица, но правительство переехало в Путраджаю.',
   },
@@ -1394,6 +1492,7 @@ export const COUNTRIES: Country[] = [
     bbox: [-12.264, 10.14, 4.236, 24.995],
     neighborsRu: ['Алжир', 'Буркина-Фасо', 'Гвинея', 'Кот-д\'Ивуар', 'Мавритания', 'Нигер', 'Сенегал'],
     region: 'africa',
+    subregionRu: 'Западная Африка',
     tier: 'hard',
   },
   {
@@ -1408,6 +1507,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: [],
     seaRu: 'Индийский океан',
     region: 'asia',
+    subregionRu: 'Южная Азия',
     tier: 'hard',
     note: 'Мале занимает почти весь свой остров целиком.',
   },
@@ -1423,6 +1523,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: [],
     seaRu: 'Средиземное море',
     region: 'europe',
+    subregionRu: 'Южная Европа',
     tier: 'medium',
   },
   {
@@ -1437,6 +1538,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Алжир', 'Западная Сахара', 'Испания'],
     seaRu: 'Атлантика и Средиземное море',
     region: 'africa',
+    subregionRu: 'Северная Африка',
     tier: 'easy',
   },
   {
@@ -1451,6 +1553,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: [],
     seaRu: 'Тихий океан',
     region: 'oceania',
+    subregionRu: 'Микронезия',
     tier: 'hard',
   },
   {
@@ -1465,6 +1568,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Белиз', 'Гватемала', 'США'],
     seaRu: 'Тихий океан и Мексиканский залив',
     region: 'americas',
+    subregionRu: 'Северная Америка',
     tier: 'easy',
   },
   {
@@ -1479,6 +1583,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: [],
     seaRu: 'Тихий океан',
     region: 'oceania',
+    subregionRu: 'Микронезия',
     tier: 'hard',
   },
   {
@@ -1493,6 +1598,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Замбия', 'Зимбабве', 'Малави', 'Танзания', 'Эсватини', 'Южно-Африканская Республика'],
     seaRu: 'Индийский океан',
     region: 'africa',
+    subregionRu: 'Восточная Африка',
     tier: 'medium',
   },
   {
@@ -1506,6 +1612,7 @@ export const COUNTRIES: Country[] = [
     bbox: [26.618, 45.462, 30.132, 48.486],
     neighborsRu: ['Румыния', 'Украина'],
     region: 'europe',
+    subregionRu: 'Восточная Европа',
     tier: 'easy',
   },
   {
@@ -1520,6 +1627,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Франция'],
     seaRu: 'Средиземное море',
     region: 'europe',
+    subregionRu: 'Западная Европа',
     tier: 'easy',
     note: 'Государство-город: страны без столицы не бывает, но здесь они совпадают.',
   },
@@ -1534,6 +1642,7 @@ export const COUNTRIES: Country[] = [
     bbox: [87.736, 41.586, 119.907, 52.13],
     neighborsRu: ['Китай', 'Россия'],
     region: 'asia',
+    subregionRu: 'Восточная Азия',
     tier: 'easy',
   },
   {
@@ -1548,6 +1657,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Бангладеш', 'Индия', 'Китай', 'Лаос', 'Таиланд'],
     seaRu: 'Андаманское море',
     region: 'asia',
+    subregionRu: 'Юго-Восточная Азия',
     tier: 'medium',
     note: 'Столицу перенесли из Янгона в Нейпьидо в 2006 году.',
   },
@@ -1563,6 +1673,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Ангола', 'Ботсвана', 'Замбия', 'Южно-Африканская Республика'],
     seaRu: 'Атлантический океан',
     region: 'africa',
+    subregionRu: 'Южная Африка',
     tier: 'medium',
   },
   {
@@ -1577,6 +1688,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: [],
     seaRu: 'Тихий океан',
     region: 'oceania',
+    subregionRu: 'Микронезия',
     tier: 'hard',
     note: 'Официальной столицы нет: Ярен — округ, где сидит правительство.',
   },
@@ -1591,6 +1703,7 @@ export const COUNTRIES: Country[] = [
     bbox: [80.03, 26.344, 88.169, 30.417],
     neighborsRu: ['Индия', 'Китай'],
     region: 'asia',
+    subregionRu: 'Южная Азия',
     tier: 'medium',
   },
   {
@@ -1604,6 +1717,7 @@ export const COUNTRIES: Country[] = [
     bbox: [0.153, 11.696, 15.97, 23.517],
     neighborsRu: ['Алжир', 'Бенин', 'Буркина-Фасо', 'Ливия', 'Мали', 'Нигерия', 'Чад'],
     region: 'africa',
+    subregionRu: 'Западная Африка',
     tier: 'hard',
   },
   {
@@ -1618,6 +1732,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Бенин', 'Камерун', 'Нигер', 'Чад'],
     seaRu: 'Гвинейский залив',
     region: 'africa',
+    subregionRu: 'Западная Африка',
     tier: 'easy',
     note: 'Столицу перенесли из Лагоса в Абуджу в 1991 году.',
   },
@@ -1633,6 +1748,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Бельгия', 'Германия'],
     seaRu: 'Северное море',
     region: 'europe',
+    subregionRu: 'Западная Европа',
     tier: 'easy',
     note: 'Парламент и король работают в Гааге, но столица по конституции — Амстердам.',
   },
@@ -1648,6 +1764,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Гондурас', 'Коста-Рика'],
     seaRu: 'Карибское море и Тихий океан',
     region: 'americas',
+    subregionRu: 'Центральная Америка',
     tier: 'medium',
   },
   {
@@ -1662,6 +1779,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: [],
     seaRu: 'Тихий океан',
     region: 'oceania',
+    subregionRu: 'Австралия и Новая Зеландия',
     tier: 'easy',
     note: 'Столицу перенесли из Окленда в Веллингтон в 1865 году — ближе к центру страны.',
   },
@@ -1677,6 +1795,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Россия', 'Финляндия', 'Швеция'],
     seaRu: 'Норвежское море',
     region: 'europe',
+    subregionRu: 'Северная Европа',
     tier: 'easy',
   },
   {
@@ -1691,6 +1810,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Оман', 'Саудовская Аравия'],
     seaRu: 'Персидский залив',
     region: 'asia',
+    subregionRu: 'Передняя Азия',
     tier: 'easy',
   },
   {
@@ -1705,6 +1825,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Йемен', 'ОАЭ', 'Саудовская Аравия'],
     seaRu: 'Аравийское море',
     region: 'asia',
+    subregionRu: 'Передняя Азия',
     tier: 'medium',
   },
   {
@@ -1719,6 +1840,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Афганистан', 'Индия', 'Иран', 'Китай'],
     seaRu: 'Аравийское море',
     region: 'asia',
+    subregionRu: 'Южная Азия',
     tier: 'easy',
     note: 'Исламабад построен в 1960-х, до него столицей был Карачи.',
   },
@@ -1734,6 +1856,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: [],
     seaRu: 'Тихий океан',
     region: 'oceania',
+    subregionRu: 'Микронезия',
     tier: 'hard',
     note: 'Нгерулмуд — самая малонаселённая столица мира.',
   },
@@ -1749,6 +1872,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Египет', 'Израиль', 'Иордания'],
     seaRu: 'Средиземное море',
     region: 'asia',
+    subregionRu: 'Передняя Азия',
     tier: 'medium',
     note: 'Провозглашённая столица — Восточный Иерусалим, фактический центр управления — Рамалла.',
   },
@@ -1764,6 +1888,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Колумбия', 'Коста-Рика'],
     seaRu: 'Карибское море и Тихий океан',
     region: 'americas',
+    subregionRu: 'Центральная Америка',
     tier: 'medium',
   },
   {
@@ -1778,6 +1903,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Индонезия'],
     seaRu: 'Тихий океан',
     region: 'oceania',
+    subregionRu: 'Меланезия',
     tier: 'medium',
   },
   {
@@ -1791,6 +1917,7 @@ export const COUNTRIES: Country[] = [
     bbox: [-62.65, -27.587, -54.245, -19.287],
     neighborsRu: ['Аргентина', 'Боливия', 'Бразилия'],
     region: 'americas',
+    subregionRu: 'Южная Америка',
     tier: 'medium',
   },
   {
@@ -1805,6 +1932,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Боливия', 'Бразилия', 'Колумбия', 'Чили', 'Эквадор'],
     seaRu: 'Тихий океан',
     region: 'americas',
+    subregionRu: 'Южная Америка',
     tier: 'easy',
   },
   {
@@ -1819,6 +1947,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Беларусь', 'Германия', 'Литва', 'Россия', 'Словакия', 'Украина', 'Чехия'],
     seaRu: 'Балтийское море',
     region: 'europe',
+    subregionRu: 'Центральная Европа',
     tier: 'easy',
   },
   {
@@ -1833,6 +1962,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Испания'],
     seaRu: 'Атлантический океан',
     region: 'europe',
+    subregionRu: 'Южная Европа',
     tier: 'easy',
   },
   {
@@ -1847,6 +1977,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Ангола', 'Габон', 'ДР Конго', 'Камерун', 'ЦАР'],
     seaRu: 'Атлантический океан',
     region: 'africa',
+    subregionRu: 'Центральная Африка',
     tier: 'medium',
   },
   {
@@ -1861,6 +1992,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Азербайджан', 'Беларусь', 'Грузия', 'Казахстан', 'Китай', 'Латвия', 'Литва', 'Монголия', 'Норвегия', 'Польша', 'Северная Корея', 'Украина', 'Финляндия', 'Эстония'],
     seaRu: 'от Балтики до Тихого океана',
     region: 'europe',
+    subregionRu: 'Восточная Европа',
     tier: 'easy',
     note: 'Москва — крупнейший город Европы по населению.',
   },
@@ -1875,6 +2007,7 @@ export const COUNTRIES: Country[] = [
     bbox: [28.857, -2.827, 30.888, -1.059],
     neighborsRu: ['Бурунди', 'ДР Конго', 'Танзания', 'Уганда'],
     region: 'africa',
+    subregionRu: 'Восточная Африка',
     tier: 'hard',
   },
   {
@@ -1889,6 +2022,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Болгария', 'Венгрия', 'Молдавия', 'Сербия', 'Украина'],
     seaRu: 'Чёрное море',
     region: 'europe',
+    subregionRu: 'Юго-Восточная Европа',
     tier: 'easy',
   },
   {
@@ -1903,6 +2037,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Гватемала', 'Гондурас'],
     seaRu: 'Тихий океан',
     region: 'americas',
+    subregionRu: 'Центральная Америка',
     tier: 'medium',
   },
   {
@@ -1917,6 +2052,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: [],
     seaRu: 'Тихий океан',
     region: 'oceania',
+    subregionRu: 'Полинезия',
     tier: 'hard',
   },
   {
@@ -1930,6 +2066,7 @@ export const COUNTRIES: Country[] = [
     bbox: [12.386, 43.892, 12.492, 43.983],
     neighborsRu: ['Италия'],
     region: 'europe',
+    subregionRu: 'Южная Европа',
     tier: 'hard',
   },
   {
@@ -1944,6 +2081,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: [],
     seaRu: 'Гвинейский залив',
     region: 'africa',
+    subregionRu: 'Центральная Африка',
     tier: 'hard',
   },
   {
@@ -1958,6 +2096,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Иордания', 'Ирак', 'Йемен', 'Катар', 'Кувейт', 'ОАЭ', 'Оман'],
     seaRu: 'Красное море и Персидский залив',
     region: 'asia',
+    subregionRu: 'Передняя Азия',
     tier: 'easy',
   },
   {
@@ -1972,6 +2111,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Китай', 'Россия', 'Южная Корея'],
     seaRu: 'Жёлтое и Японское моря',
     region: 'asia',
+    subregionRu: 'Восточная Азия',
     tier: 'easy',
     note: 'Пхеньян почти полностью отстроен заново после войны 1950–1953 годов.',
   },
@@ -1986,6 +2126,7 @@ export const COUNTRIES: Country[] = [
     bbox: [20.444, 40.849, 23.01, 42.37],
     neighborsRu: ['Албания', 'Болгария', 'Греция', 'Республика Косово', 'Сербия'],
     region: 'europe',
+    subregionRu: 'Юго-Восточная Европа',
     tier: 'medium',
   },
   {
@@ -2000,6 +2141,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: [],
     seaRu: 'Индийский океан',
     region: 'africa',
+    subregionRu: 'Восточная Африка',
     tier: 'hard',
   },
   {
@@ -2014,6 +2156,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Гамбия', 'Гвинея', 'Гвинея-Бисау', 'Мавритания', 'Мали'],
     seaRu: 'Атлантический океан',
     region: 'africa',
+    subregionRu: 'Западная Африка',
     tier: 'medium',
   },
   {
@@ -2028,6 +2171,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: [],
     seaRu: 'Карибское море',
     region: 'americas',
+    subregionRu: 'Карибы',
     tier: 'hard',
   },
   {
@@ -2042,6 +2186,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: [],
     seaRu: 'Карибское море',
     region: 'americas',
+    subregionRu: 'Карибы',
     tier: 'hard',
   },
   {
@@ -2056,6 +2201,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: [],
     seaRu: 'Карибское море',
     region: 'americas',
+    subregionRu: 'Карибы',
     tier: 'hard',
   },
   {
@@ -2069,6 +2215,7 @@ export const COUNTRIES: Country[] = [
     bbox: [18.845, 42.235, 22.985, 46.174],
     neighborsRu: ['Болгария', 'Босния и Герцеговина', 'Венгрия', 'Республика Косово', 'Румыния', 'Северная Македония', 'Хорватия', 'Черногория'],
     region: 'europe',
+    subregionRu: 'Юго-Восточная Европа',
     tier: 'easy',
   },
   {
@@ -2083,6 +2230,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: [],
     seaRu: 'Сингапурский пролив',
     region: 'asia',
+    subregionRu: 'Юго-Восточная Азия',
     tier: 'easy',
     note: 'Город-государство: остров целиком и есть страна.',
   },
@@ -2098,6 +2246,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Израиль', 'Иордания', 'Ирак', 'Ливан', 'Турция'],
     seaRu: 'Средиземное море',
     region: 'asia',
+    subregionRu: 'Передняя Азия',
     tier: 'easy',
   },
   {
@@ -2111,6 +2260,7 @@ export const COUNTRIES: Country[] = [
     bbox: [16.844, 47.75, 22.54, 49.602],
     neighborsRu: ['Австрия', 'Венгрия', 'Польша', 'Украина', 'Чехия'],
     region: 'europe',
+    subregionRu: 'Центральная Европа',
     tier: 'easy',
   },
   {
@@ -2125,6 +2275,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Австрия', 'Венгрия', 'Италия', 'Хорватия'],
     seaRu: 'Адриатическое море',
     region: 'europe',
+    subregionRu: 'Центральная Европа',
     tier: 'medium',
   },
   {
@@ -2139,6 +2290,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: [],
     seaRu: 'Тихий океан',
     region: 'oceania',
+    subregionRu: 'Меланезия',
     tier: 'hard',
   },
   {
@@ -2153,6 +2305,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Джибути', 'Кения', 'Эфиопия'],
     seaRu: 'Индийский океан и Аденский залив',
     region: 'africa',
+    subregionRu: 'Восточная Африка',
     tier: 'medium',
   },
   {
@@ -2167,6 +2320,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Египет', 'Ливия', 'ЦАР', 'Чад', 'Эритрея', 'Эфиопия', 'Южный Судан'],
     seaRu: 'Красное море',
     region: 'africa',
+    subregionRu: 'Северная Африка',
     tier: 'medium',
   },
   {
@@ -2181,6 +2335,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Бразилия', 'Гайана', 'Французская Гвиана'],
     seaRu: 'Атлантический океан',
     region: 'americas',
+    subregionRu: 'Южная Америка',
     tier: 'hard',
   },
   {
@@ -2195,6 +2350,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Канада', 'Мексика'],
     seaRu: 'Атлантический и Тихий океаны',
     region: 'americas',
+    subregionRu: 'Северная Америка',
     tier: 'easy',
     note: 'Вашингтон — не штат, а отдельный федеральный округ Колумбия.',
   },
@@ -2210,6 +2366,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Гвинея', 'Либерия'],
     seaRu: 'Атлантический океан',
     region: 'africa',
+    subregionRu: 'Западная Африка',
     tier: 'hard',
   },
   {
@@ -2223,6 +2380,7 @@ export const COUNTRIES: Country[] = [
     bbox: [67.343, 36.679, 75.164, 41.04],
     neighborsRu: ['Афганистан', 'Киргизия', 'Китай', 'Узбекистан'],
     region: 'asia',
+    subregionRu: 'Средняя Азия',
     tier: 'hard',
   },
   {
@@ -2237,6 +2395,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Камбоджа', 'Лаос', 'Малайзия', 'Мьянма'],
     seaRu: 'Андаманское море и Сиамский залив',
     region: 'asia',
+    subregionRu: 'Юго-Восточная Азия',
     tier: 'easy',
   },
   {
@@ -2251,6 +2410,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Бурунди', 'ДР Конго', 'Замбия', 'Кения', 'Малави', 'Мозамбик', 'Руанда', 'Уганда'],
     seaRu: 'Индийский океан',
     region: 'africa',
+    subregionRu: 'Восточная Африка',
     tier: 'medium',
     note: 'Столица перенесена в Додому, крупнейший город и порт — Дар-эс-Салам.',
   },
@@ -2266,6 +2426,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Бенин', 'Буркина-Фасо', 'Гана'],
     seaRu: 'Гвинейский залив',
     region: 'africa',
+    subregionRu: 'Западная Африка',
     tier: 'hard',
   },
   {
@@ -2280,6 +2441,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: [],
     seaRu: 'Тихий океан',
     region: 'oceania',
+    subregionRu: 'Полинезия',
     tier: 'hard',
   },
   {
@@ -2294,6 +2456,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: [],
     seaRu: 'Карибское море',
     region: 'americas',
+    subregionRu: 'Карибы',
     tier: 'medium',
   },
   {
@@ -2308,6 +2471,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: [],
     seaRu: 'Тихий океан',
     region: 'oceania',
+    subregionRu: 'Полинезия',
     tier: 'hard',
   },
   {
@@ -2322,6 +2486,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Алжир', 'Ливия'],
     seaRu: 'Средиземное море',
     region: 'africa',
+    subregionRu: 'Северная Африка',
     tier: 'easy',
   },
   {
@@ -2336,6 +2501,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Афганистан', 'Иран', 'Казахстан', 'Узбекистан'],
     seaRu: 'Каспийское море',
     region: 'asia',
+    subregionRu: 'Средняя Азия',
     tier: 'hard',
   },
   {
@@ -2350,6 +2516,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Азербайджан', 'Армения', 'Болгария', 'Греция', 'Грузия', 'Ирак', 'Иран', 'Сирия'],
     seaRu: 'Чёрное и Средиземное моря',
     region: 'asia',
+    subregionRu: 'Передняя Азия',
     tier: 'easy',
     note: 'Столица с 1923 года — Анкара, хотя крупнейший город — Стамбул.',
   },
@@ -2364,6 +2531,7 @@ export const COUNTRIES: Country[] = [
     bbox: [29.548, -1.475, 35.006, 4.22],
     neighborsRu: ['ДР Конго', 'Кения', 'Руанда', 'Танзания', 'Южный Судан'],
     region: 'africa',
+    subregionRu: 'Восточная Африка',
     tier: 'medium',
   },
   {
@@ -2377,6 +2545,7 @@ export const COUNTRIES: Country[] = [
     bbox: [55.976, 37.185, 73.149, 45.559],
     neighborsRu: ['Афганистан', 'Казахстан', 'Киргизия', 'Таджикистан', 'Туркменистан'],
     region: 'asia',
+    subregionRu: 'Средняя Азия',
     tier: 'easy',
   },
   {
@@ -2391,6 +2560,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Беларусь', 'Венгрия', 'Молдавия', 'Польша', 'Россия', 'Румыния', 'Словакия'],
     seaRu: 'Чёрное море',
     region: 'europe',
+    subregionRu: 'Восточная Европа',
     tier: 'easy',
     note: 'Киев — один из старейших городов Восточной Европы, «мать городов русских».',
   },
@@ -2406,6 +2576,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Аргентина', 'Бразилия'],
     seaRu: 'Атлантический океан',
     region: 'americas',
+    subregionRu: 'Южная Америка',
     tier: 'medium',
   },
   {
@@ -2420,6 +2591,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: [],
     seaRu: 'Тихий океан',
     region: 'oceania',
+    subregionRu: 'Меланезия',
     tier: 'medium',
   },
   {
@@ -2434,6 +2606,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: [],
     seaRu: 'Тихий океан и Южно-Китайское море',
     region: 'asia',
+    subregionRu: 'Юго-Восточная Азия',
     tier: 'easy',
   },
   {
@@ -2448,6 +2621,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Норвегия', 'Россия', 'Швеция'],
     seaRu: 'Балтийское море',
     region: 'europe',
+    subregionRu: 'Северная Европа',
     tier: 'easy',
   },
   {
@@ -2462,6 +2636,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Андорра', 'Бельгия', 'Германия', 'Испания', 'Италия', 'Люксембург', 'Монако', 'Швейцария'],
     seaRu: 'Атлантика и Средиземное море',
     region: 'europe',
+    subregionRu: 'Западная Европа',
     tier: 'easy',
   },
   {
@@ -2476,6 +2651,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Босния и Герцеговина', 'Венгрия', 'Сербия', 'Словения', 'Черногория'],
     seaRu: 'Адриатическое море',
     region: 'europe',
+    subregionRu: 'Юго-Восточная Европа',
     tier: 'easy',
   },
   {
@@ -2489,6 +2665,7 @@ export const COUNTRIES: Country[] = [
     bbox: [14.387, 2.236, 27.441, 11.001],
     neighborsRu: ['ДР Конго', 'Камерун', 'Республика Конго', 'Судан', 'Чад', 'Южный Судан'],
     region: 'africa',
+    subregionRu: 'Центральная Африка',
     tier: 'hard',
   },
   {
@@ -2502,6 +2679,7 @@ export const COUNTRIES: Country[] = [
     bbox: [13.449, 7.456, 23.984, 23.445],
     neighborsRu: ['Камерун', 'Ливия', 'Нигер', 'Нигерия', 'Судан', 'ЦАР'],
     region: 'africa',
+    subregionRu: 'Центральная Африка',
     tier: 'hard',
   },
   {
@@ -2516,6 +2694,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Албания', 'Босния и Герцеговина', 'Республика Косово', 'Сербия', 'Хорватия'],
     seaRu: 'Адриатическое море',
     region: 'europe',
+    subregionRu: 'Юго-Восточная Европа',
     tier: 'medium',
     note: 'Подгорица — столица, но резиденция президента и церкви — в Цетине.',
   },
@@ -2530,6 +2709,7 @@ export const COUNTRIES: Country[] = [
     bbox: [12.076, 48.558, 18.837, 51.04],
     neighborsRu: ['Австрия', 'Германия', 'Польша', 'Словакия'],
     region: 'europe',
+    subregionRu: 'Центральная Европа',
     tier: 'easy',
   },
   {
@@ -2544,6 +2724,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Аргентина', 'Боливия', 'Перу'],
     seaRu: 'Тихий океан',
     region: 'americas',
+    subregionRu: 'Южная Америка',
     tier: 'easy',
     note: 'Правительство в Сантьяго, а Национальный конгресс заседает в Вальпараисо.',
   },
@@ -2558,6 +2739,7 @@ export const COUNTRIES: Country[] = [
     bbox: [5.955, 45.821, 10.467, 47.801],
     neighborsRu: ['Австрия', 'Германия', 'Италия', 'Лихтенштейн', 'Франция'],
     region: 'europe',
+    subregionRu: 'Западная Европа',
     tier: 'easy',
     note: 'Берн — «федеральный город»: слова «столица» в конституции Швейцарии нет.',
   },
@@ -2573,6 +2755,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Норвегия', 'Финляндия'],
     seaRu: 'Балтийское море',
     region: 'europe',
+    subregionRu: 'Северная Европа',
     tier: 'easy',
   },
   {
@@ -2587,6 +2770,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Индия'],
     seaRu: 'Индийский океан',
     region: 'asia',
+    subregionRu: 'Южная Азия',
     tier: 'medium',
     note: 'Официальная столица — пригород Шри-Джаяварденепура-Котте, но всё главное в Коломбо.',
   },
@@ -2602,6 +2786,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Колумбия', 'Перу'],
     seaRu: 'Тихий океан',
     region: 'americas',
+    subregionRu: 'Южная Америка',
     tier: 'medium',
   },
   {
@@ -2616,6 +2801,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Габон', 'Камерун'],
     seaRu: 'Гвинейский залив',
     region: 'africa',
+    subregionRu: 'Центральная Африка',
     tier: 'hard',
     note: 'Строится новая столица Сьюдад-де-ла-Пас в джунглях материка, но жизнь пока в Малабо.',
   },
@@ -2631,6 +2817,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Джибути', 'Судан', 'Эфиопия'],
     seaRu: 'Красное море',
     region: 'africa',
+    subregionRu: 'Восточная Африка',
     tier: 'hard',
   },
   {
@@ -2644,6 +2831,7 @@ export const COUNTRIES: Country[] = [
     bbox: [30.783, -27.316, 32.117, -25.736],
     neighborsRu: ['Мозамбик', 'Южно-Африканская Республика'],
     region: 'africa',
+    subregionRu: 'Южная Африка',
     tier: 'hard',
     note: 'Мбабане — административная столица, королевская и парламентская — Лобамба.',
   },
@@ -2659,6 +2847,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Латвия', 'Россия'],
     seaRu: 'Балтийское море',
     region: 'europe',
+    subregionRu: 'Северная Европа',
     tier: 'easy',
   },
   {
@@ -2672,6 +2861,7 @@ export const COUNTRIES: Country[] = [
     bbox: [32.99, 3.403, 47.979, 14.88],
     neighborsRu: ['Джибути', 'Кения', 'Сомали', 'Судан', 'Эритрея', 'Южный Судан'],
     region: 'africa',
+    subregionRu: 'Восточная Африка',
     tier: 'easy',
   },
   {
@@ -2686,6 +2876,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Северная Корея'],
     seaRu: 'Жёлтое и Японское моря',
     region: 'asia',
+    subregionRu: 'Восточная Азия',
     tier: 'easy',
     note: 'Часть министерств переехала в Сеян, но столица — Сеул.',
   },
@@ -2701,6 +2892,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: ['Ботсвана', 'Зимбабве', 'Лесото', 'Мозамбик', 'Намибия', 'Эсватини'],
     seaRu: 'Атлантический и Индийский океаны',
     region: 'africa',
+    subregionRu: 'Южная Африка',
     tier: 'easy',
     note: 'Три столицы: Претория — административная, Кейптаун — парламент, Блумфонтейн — суд.',
   },
@@ -2715,6 +2907,7 @@ export const COUNTRIES: Country[] = [
     bbox: [24.122, 3.49, 35.921, 12.216],
     neighborsRu: ['ДР Конго', 'Кения', 'Судан', 'Уганда', 'ЦАР', 'Эфиопия'],
     region: 'africa',
+    subregionRu: 'Центральная Африка',
     tier: 'hard',
     note: 'Обсуждается перенос столицы из Джубы в Рамсель, но город не построен.',
   },
@@ -2730,6 +2923,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: [],
     seaRu: 'Карибское море',
     region: 'americas',
+    subregionRu: 'Карибы',
     tier: 'medium',
   },
   {
@@ -2744,6 +2938,7 @@ export const COUNTRIES: Country[] = [
     neighborsRu: [],
     seaRu: 'Тихий океан и Японское море',
     region: 'asia',
+    subregionRu: 'Восточная Азия',
     tier: 'easy',
     note: 'Формального закона о столице нет, но император и правительство в Токио.',
   },

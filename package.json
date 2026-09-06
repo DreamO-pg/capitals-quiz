@@ -12,6 +12,7 @@
   "dependencies": {
     "@fontsource/golos-text": "^5.3.0",
     "@fontsource/literata": "^5.3.0",
+    "country-flag-icons": "^1.6.20",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },

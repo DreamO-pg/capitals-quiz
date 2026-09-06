@@ -27,6 +27,9 @@ const scroll: CSSProperties = {
   overflowY: 'auto',
   WebkitOverflowScrolling: 'touch',
   padding: '16px var(--screen-pad) 24px',
+  // Колонка нужна экрану вопроса: варианты прижимаются к низу через marginTop: auto.
+  display: 'flex',
+  flexDirection: 'column',
 };
 
 const footerBar: CSSProperties = {

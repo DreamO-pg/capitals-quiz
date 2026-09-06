@@ -1,11 +1,18 @@
 import type { CSSProperties } from 'react';
+import { Flag } from '../components/Flag';
 import { Screen } from '../components/Screen';
 import type { Game } from '../hooks/useGame';
 
 /** Временная разметка этапа 3. Кольцо счёта и разбор ошибок — этап 6. */
 export function ResultScreen({ game }: { game: Game }) {
   const correct = game.answers.filter((a) => a.correct).length;
-  const mistakes = game.answers.filter((a) => !a.correct);
+  // Одна страна — одна строка: повтор после ошибки внутри раунда даёт второй
+  // промах по той же стране, и без схлопывания разбор пестрит дублями.
+  const mistakes = [
+    ...new Map(
+      game.answers.filter((a) => !a.correct).map((a) => [a.question.country.code, a]),
+    ).values(),
+  ];
 
   return (
     <Screen
@@ -26,9 +33,12 @@ export function ResultScreen({ game }: { game: Game }) {
       {mistakes.length > 0 ? (
         <div style={{ marginTop: 24 }}>
           <div style={label}>Ошибки</div>
-          {mistakes.map((a, i) => (
-            <div key={i} style={row}>
-              {a.question.country.nameRu} — {a.question.country.capitalRu}
+          {mistakes.map((a) => (
+            <div key={a.question.country.code} style={row}>
+              <Flag code={a.question.country.code} size="sm" />
+              <span>
+                {a.question.country.nameRu} — {a.question.country.capitalRu}
+              </span>
             </div>
           ))}
         </div>
@@ -51,7 +61,14 @@ const label: CSSProperties = {
   color: 'var(--c-muted)',
   marginBottom: 8,
 };
-const row: CSSProperties = { fontSize: 15, fontWeight: 600, padding: '6px 0' };
+const row: CSSProperties = {
+  display: 'flex',
+  alignItems: 'center',
+  gap: 10,
+  fontSize: 15,
+  fontWeight: 600,
+  padding: '6px 0',
+};
 const primary: CSSProperties = {
   width: '100%', height: 56, borderRadius: 'var(--r-button)',
   background: 'var(--c-accent)', color: '#fff', fontSize: 16, fontWeight: 600,

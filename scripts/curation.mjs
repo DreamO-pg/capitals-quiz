@@ -256,3 +256,34 @@ export const SEA = {
   TV: 'Тихий океан', KI: 'Тихий океан', MH: 'Тихий океан', FM: 'Тихий океан',
   PW: 'Тихий океан', TO: 'Тихий океан', WS: 'Тихий океан',
 };
+
+/**
+ * Подрегионы по-русски. Нужны строке контекста под картой: «Западная Европа ·
+ * единственный сосед — Испания» говорит о месте на планете куда больше, чем «Европа».
+ */
+export const SUBREGION_RU = {
+  'Western Europe': 'Западная Европа',
+  'Northern Europe': 'Северная Европа',
+  'Southern Europe': 'Южная Европа',
+  'Eastern Europe': 'Восточная Европа',
+  'Central Europe': 'Центральная Европа',
+  'Southeast Europe': 'Юго-Восточная Европа',
+  'Western Asia': 'Передняя Азия',
+  'Central Asia': 'Средняя Азия',
+  'Southern Asia': 'Южная Азия',
+  'Eastern Asia': 'Восточная Азия',
+  'South-Eastern Asia': 'Юго-Восточная Азия',
+  'Northern Africa': 'Северная Африка',
+  'Western Africa': 'Западная Африка',
+  'Middle Africa': 'Центральная Африка',
+  'Eastern Africa': 'Восточная Африка',
+  'Southern Africa': 'Южная Африка',
+  'North America': 'Северная Америка',
+  'Central America': 'Центральная Америка',
+  'South America': 'Южная Америка',
+  'Caribbean': 'Карибы',
+  'Australia and New Zealand': 'Австралия и Новая Зеландия',
+  'Melanesia': 'Меланезия',
+  'Micronesia': 'Микронезия',
+  'Polynesia': 'Полинезия',
+};

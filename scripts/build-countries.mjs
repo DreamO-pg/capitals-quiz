@@ -12,7 +12,7 @@
  * Скачанное кешируется в .cache/, чтобы не дёргать сеть на каждый прогон.
  */
 
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { copyFile, mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -26,11 +26,14 @@ import {
   NOTES,
   RU_NAME_OVERRIDE,
   SEA,
+  SUBREGION_RU,
 } from './curation.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const CACHE = join(ROOT, '.cache');
 const OUT = join(ROOT, 'src/data/countries.ts');
+const FLAGS_OUT = join(ROOT, 'src/assets/flags');
+const FLAGS_SRC = join(ROOT, 'node_modules/country-flag-icons/3x2');
 
 const MLEDOZE = 'https://raw.githubusercontent.com/mledoze/countries/master/countries.json';
 const NATURAL_EARTH =
@@ -231,6 +234,33 @@ function indexNaturalEarth(geojson, cca3ToCca2) {
   return byIso2;
 }
 
+/* ─────────────────────────── Флаги ─────────────────────────── */
+
+/**
+ * Кладём в проект только флаги наших 195 стран.
+ * В пакете их 267, и лишние — это флаги территорий с детальными гербами:
+ * они весят в тридцать раз больше обычного полотнища и раздувают бандл впустую.
+ */
+async function copyFlags(codes) {
+  await mkdir(FLAGS_OUT, { recursive: true });
+  const existing = await readdir(FLAGS_OUT).catch(() => []);
+  const wanted = new Set(codes.map((c) => `${c}.svg`));
+  for (const file of existing) {
+    if (!wanted.has(file)) await rm(join(FLAGS_OUT, file));
+  }
+  let bytes = 0;
+  for (const code of codes) {
+    const from = join(FLAGS_SRC, `${code}.svg`);
+    if (!existsSync(from)) {
+      warn(`${code}: нет флага в country-flag-icons`);
+      continue;
+    }
+    await copyFile(from, join(FLAGS_OUT, `${code}.svg`));
+    bytes += (await readFile(from)).length;
+  }
+  process.stderr.write(`флагов скопировано: ${codes.length}, ${Math.round(bytes / 1024)} КБ\n`);
+}
+
 /* ─────────────────────────── Сборка ─────────────────────────── */
 
 const ts = (s) => `'${s.replace(/\\/g, '\\\\').replace(/'/g, "\\'")}'`;
@@ -280,6 +310,7 @@ async function main() {
 
     const region = REGION_BY_SOURCE[c.region];
     if (!region) warn(`${iso2}: неизвестный регион «${c.region}»`);
+    if (!SUBREGION_RU[c.subregion]) warn(`${iso2}: нет перевода подрегиона «${c.subregion}»`);
 
     const neighbors = (c.borders ?? []).map((b) => ruByCca3.get(b) ?? b).sort((a, b) => a.localeCompare(b, 'ru'));
 
@@ -295,6 +326,7 @@ async function main() {
       neighborsRu: neighbors,
       seaRu: SEA[iso2],
       region: region ?? 'asia',
+      subregionRu: SUBREGION_RU[c.subregion] ?? '',
       tier: EASY.includes(iso2) ? 'easy' : HARD.includes(iso2) ? 'hard' : 'medium',
       note: NOTES[iso2],
     });
@@ -316,7 +348,11 @@ async function main() {
         `    neighborsRu: [${c.neighborsRu.map(ts).join(', ')}],`,
       ];
       if (c.seaRu) lines.push(`    seaRu: ${ts(c.seaRu)},`);
-      lines.push(`    region: ${ts(c.region)},`, `    tier: ${ts(c.tier)},`);
+      lines.push(
+        `    region: ${ts(c.region)},`,
+        `    subregionRu: ${ts(c.subregionRu)},`,
+        `    tier: ${ts(c.tier)},`,
+      );
       if (c.note) lines.push(`    note: ${ts(c.note)},`);
       return `  {\n${lines.join('\n')}\n  },`;
     })
@@ -342,6 +378,7 @@ export const BY_CODE: Record<string, Country> = Object.fromEntries(
 `;
 
   await writeFile(OUT, header);
+  await copyFlags(out.map((c) => c.code));
 
   const byRegion = {};
   const byTier = {};
