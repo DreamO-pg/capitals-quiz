@@ -58,6 +58,24 @@ export function optionText(country: Country, mode: Mode): string {
  * Случайные страны с разных континентов делают вопрос бессмысленно лёгким:
  * Улан-Батор среди европейских столиц виден сразу, думать не надо.
  */
+/**
+ * Разброс точек в режиме «страна на карте», в градусах.
+ *
+ * Нижняя граница — чтобы маркеры не наложились: столицы Ватикана и Италии стоят
+ * в двух километрах друг от друга, их кружки совпадают полностью.
+ *
+ * Верхняя — чтобы кадр не раздувался. Регион большой: Минск и Рейкьявик оба
+ * «Европа», но с таким дистрактором карта раскрывается от Гренландии до Африки,
+ * и уже Минск с Киевом не различить. Ограничение держит кадр плотным, а выбор —
+ * осмысленным: рядом стоящие страны отличить труднее, чем далёкие.
+ */
+const MIN_SEPARATION = 2.5;
+const MAX_SEPARATION = 22;
+
+function distance(a: Country, b: Country): number {
+  return Math.hypot(a.capitalLat - b.capitalLat, a.capitalLon - b.capitalLon);
+}
+
 export function pickDistractors(
   answer: Country,
   mode: Mode,
@@ -65,9 +83,19 @@ export function pickDistractors(
   rng: Rng = defaultRng,
 ): Country[] {
   const taken = new Set([optionText(answer, mode)]);
-  const usable = (c: Country) => c.code !== answer.code && !taken.has(optionText(c, mode));
+  const onMap = mode === 'country_to_map';
+  // Предел разлёта ослабляем, если подходящих соседей просто нет: в Океании
+  // ближайшая столица бывает дальше, чем через пол-Европы.
+  let maxSeparation = MAX_SEPARATION;
+  const usable = (c: Country) => {
+    if (c.code === answer.code || taken.has(optionText(c, mode))) return false;
+    if (!onMap) return true;
+    if (distance(c, answer) > maxSeparation) return false;
+    return [answer, ...picked].every((p) => distance(c, p) >= MIN_SEPARATION);
+  };
 
   // Ищем по кругам: свой регион и тир → свой регион → свой тир → кто угодно.
+  const picked: Country[] = [];
   const circles: Country[][] = [
     COUNTRIES.filter((c) => c.region === answer.region && c.tier === answer.tier),
     COUNTRIES.filter((c) => c.region === answer.region),
@@ -75,14 +103,21 @@ export function pickDistractors(
     COUNTRIES,
   ];
 
-  const picked: Country[] = [];
-  for (const circle of circles) {
-    if (picked.length >= count) break;
-    for (const c of shuffle(circle.filter(usable), rng)) {
+  // Проходы: сначала на своих условиях, потом с растущим пределом разлёта.
+  for (const limit of onMap ? [MAX_SEPARATION, MAX_SEPARATION * 3, Infinity] : [Infinity]) {
+    maxSeparation = limit;
+    for (const circle of circles) {
       if (picked.length >= count) break;
-      picked.push(c);
-      taken.add(optionText(c, mode));
+      for (const c of shuffle(circle, rng)) {
+        if (picked.length >= count) break;
+        // Условие проверяем в момент выбора, а не заранее фильтром: расстояние
+        // считается до уже отобранных точек, а их набор растёт по ходу цикла.
+        if (!usable(c)) continue;
+        picked.push(c);
+        taken.add(optionText(c, mode));
+      }
     }
+    if (picked.length >= count) break;
   }
   return picked;
 }

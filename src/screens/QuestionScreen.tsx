@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import { Flag } from '../components/Flag';
+import { MapQuestion } from '../components/MapQuestion';
 import { IconCheck, IconCross } from '../components/icons';
 import { RoundProgress } from '../components/RoundProgress';
 import { Screen } from '../components/Screen';
@@ -59,16 +60,28 @@ export function QuestionScreen({ game }: { game: Game }) {
         )}
       </div>
 
-      <div style={{ display: 'grid', gap: 8, marginTop: 'auto', paddingTop: 28 }}>
-        {q.options.map((option, i) => (
-          <Option
-            key={`${game.position.current}-${option}`}
-            text={option}
-            state={optionState(i, chosen, q.correctIndex)}
-            onClick={() => choose(i)}
+      {q.mode === 'country_to_map' ? (
+        <div style={{ display: 'flex', flexDirection: 'column', flex: 1, marginTop: 20 }}>
+          <MapQuestion
+            options={q.optionCountries}
+            answered={answered}
+            correctIndex={q.correctIndex}
+            chosenIndex={chosen}
+            onPick={choose}
           />
-        ))}
-      </div>
+        </div>
+      ) : (
+        <div style={{ display: 'grid', gap: 8, marginTop: 'auto', paddingTop: 28 }}>
+          {q.options.map((option, i) => (
+            <Option
+              key={`${game.position.current}-${option}`}
+              text={option}
+              state={optionState(i, chosen, q.correctIndex)}
+              onClick={() => choose(i)}
+            />
+          ))}
+        </div>
+      )}
     </Screen>
   );
 }

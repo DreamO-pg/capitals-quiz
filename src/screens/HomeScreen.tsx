@@ -17,10 +17,7 @@ const DIFFICULTIES: [Difficulty, string][] = [
   ['all', 'Все страны'],
 ];
 
-/**
- * Временная разметка этапа 3: настройки и сводка уже настоящие, дизайн — этап 4.
- * Режим «страна на карте» пока выключен, он делается последним.
- */
+/** Главная: настройки раунда и короткая сводка. */
 export function HomeScreen({ game, openStats }: { game: Game; openStats: () => void }) {
   const { settings, stats } = game;
   const accuracy = stats.answers > 0 ? Math.round((100 * stats.correct) / stats.answers) : 0;
@@ -58,7 +55,6 @@ export function HomeScreen({ game, openStats }: { game: Game; openStats: () => v
           <Chip
             key={m}
             active={settings.mode === m}
-            disabled={m === 'country_to_map'}
             onClick={pick(m, (mode) => game.changeSettings({ mode }))}
           >
             {MODE_LABEL[m]}
@@ -109,18 +105,15 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 
 function Chip({
   active,
-  disabled,
   onClick,
   children,
 }: {
   active: boolean;
-  disabled?: boolean;
   onClick: () => void;
   children: React.ReactNode;
 }) {
   return (
     <button
-      disabled={disabled}
       onClick={onClick}
       style={{
         padding: '8px 12px',
@@ -129,8 +122,7 @@ function Chip({
         fontWeight: 600,
         background: active ? 'var(--c-accent-bg)' : 'var(--c-surface)',
         border: `1px solid ${active ? 'var(--c-accent)' : 'var(--c-line)'}`,
-        color: disabled ? 'var(--c-ink-disabled)' : active ? 'var(--c-accent)' : 'var(--c-ink)',
-        opacity: disabled ? 0.6 : 1,
+        color: active ? 'var(--c-accent)' : 'var(--c-ink)',
       }}
     >
       {children}
