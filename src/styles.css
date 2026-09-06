@@ -1,0 +1,103 @@
+/* Кириллица + латиница, только нужные начертания — лишние подмножества в бандл не тащим. */
+@import '@fontsource/literata/cyrillic-400.css';
+@import '@fontsource/literata/cyrillic-500.css';
+@import '@fontsource/literata/latin-400.css';
+@import '@fontsource/literata/latin-500.css';
+@import '@fontsource/golos-text/cyrillic-400.css';
+@import '@fontsource/golos-text/cyrillic-500.css';
+@import '@fontsource/golos-text/cyrillic-600.css';
+@import '@fontsource/golos-text/latin-400.css';
+@import '@fontsource/golos-text/latin-500.css';
+@import '@fontsource/golos-text/latin-600.css';
+
+:root {
+  --c-bg: #faf9f5;
+  --c-surface: #ffffff;
+  --c-sunken: #f4f2ed;
+  --c-line: #e2dfd8;
+  --c-ink: #221f19;
+  --c-ink2: #5b5752;
+  --c-muted: #888681;
+  --c-accent: #007c99;
+  --c-accent-bg: #d8f0f8;
+  --c-ok: #328053;
+  --c-ok-bg: #ddf4e4;
+  --c-bad: #b14b41;
+  --c-bad-bg: #ffe7e3;
+  --c-warm: #c77f3e;
+  --c-ink-disabled: #b4b1aa;
+  --c-flag-border: rgba(34, 31, 25, 0.14);
+
+  --r-chip: 8px;
+  --r-segment: 12px;
+  --r-row: 14px;
+  --r-button: 16px;
+  --r-card: 16px;
+  --r-map: 18px;
+  --r-pill: 999px;
+
+  --font-display: 'Literata', Georgia, 'Times New Roman', serif;
+  --font-ui: 'Golos Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Заполняются из JS: viewportStableHeight и safe area телеграма. */
+  --tg-viewport-height: 100vh;
+  --tg-inset-top: 0px;
+  --tg-inset-bottom: 0px;
+
+  --screen-pad: 24px;
+
+  /* Тема всегда светлая — themeParams пользователя игнорируем осознанно. */
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--c-bg);
+  color: var(--c-ink);
+  font-family: var(--font-ui);
+  font-size: 15px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overscroll-behavior: none;
+}
+
+body {
+  /* Скролл живёт внутри экрана, а не в body: иначе телеграм ловит свайп. */
+  overflow: hidden;
+  height: var(--tg-viewport-height);
+}
+
+#root {
+  height: var(--tg-viewport-height);
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  margin: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+
+/* Не даём пользователю случайно выделять подписи долгим тапом. */
+h1, h2, h3, p, span, button, li {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
