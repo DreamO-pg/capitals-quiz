@@ -1,34 +1,40 @@
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import { AnswerScreen } from './screens/AnswerScreen';
 import { HomeScreen } from './screens/HomeScreen';
 import { QuestionScreen } from './screens/QuestionScreen';
 import { ResultScreen } from './screens/ResultScreen';
 import { StatsScreen } from './screens/StatsScreen';
 import { useBackButton } from './hooks/useBackButton';
+import { useGame } from './hooks/useGame';
 import { useViewport } from './hooks/useViewport';
-import type { Screen as ScreenName } from './types';
+import { Screen } from './components/Screen';
+import { useState } from 'react';
 
 export function App() {
   useViewport();
-  const [screen, setScreen] = useState<ScreenName>('home');
+  const game = useGame();
+  // Статистика — единственный экран вне игрового цикла, поэтому живёт отдельным флагом.
+  const [statsOpen, setStatsOpen] = useState(false);
 
-  const go = useCallback((next: ScreenName) => setScreen(next), []);
-  const home = useCallback(() => setScreen('home'), []);
+  const back = useCallback(() => {
+    if (statsOpen) setStatsOpen(false);
+    else game.goHome();
+  }, [statsOpen, game]);
 
-  // На главной кнопки «назад» нет — оттуда выход только закрытием окна.
-  useBackButton(screen !== 'home', home);
+  const inGame = game.phase === 'question' || game.phase === 'answer' || game.phase === 'result';
+  useBackButton(statsOpen || inGame, back);
 
-  switch (screen) {
+  if (game.phase === 'loading') return <Screen>{null}</Screen>;
+  if (statsOpen) return <StatsScreen game={game} />;
+
+  switch (game.phase) {
     case 'question':
-      return <QuestionScreen />;
+      return <QuestionScreen game={game} />;
     case 'answer':
-      return <AnswerScreen />;
+      return <AnswerScreen game={game} />;
     case 'result':
-      return <ResultScreen />;
-    case 'stats':
-      return <StatsScreen />;
-    case 'home':
+      return <ResultScreen game={game} />;
     default:
-      return <HomeScreen go={go} />;
+      return <HomeScreen game={game} openStats={() => setStatsOpen(true)} />;
   }
 }

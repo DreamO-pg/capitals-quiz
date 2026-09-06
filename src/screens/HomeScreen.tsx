@@ -1,98 +1,156 @@
 import type { CSSProperties } from 'react';
 import { Placeholder, Screen } from '../components/Screen';
-import { haptic, isTelegram, platform, version } from '../telegram/webapp';
-import type { Screen as ScreenName } from '../types';
+import { haptic } from '../telegram/webapp';
+import { MODE_LABEL, REGION_LABEL } from '../types';
+import type { Difficulty, Mode, RegionFilter } from '../types';
+import type { Game } from '../hooks/useGame';
+
+const MODES: Mode[] = [
+  'country_to_capital',
+  'capital_to_country',
+  'flag_to_country',
+  'country_to_map',
+];
+const REGIONS: RegionFilter[] = ['world', 'europe', 'asia', 'africa', 'americas', 'oceania'];
+const DIFFICULTIES: [Difficulty, string][] = [
+  ['easy', 'Только простые'],
+  ['all', 'Все страны'],
+];
 
 /**
- * Каркас главной. Выбор режима/региона/сложности и сводка приедут этапами 3 и 6 —
- * пока здесь только навигация, чтобы проверить связку с телеграмом.
+ * Временная разметка этапа 3: настройки и сводка уже настоящие, дизайн — этап 4.
+ * Режим «страна на карте» пока выключен, он делается последним.
  */
-export function HomeScreen({ go }: { go: (s: ScreenName) => void }) {
+export function HomeScreen({ game, openStats }: { game: Game; openStats: () => void }) {
+  const { settings, stats } = game;
+  const accuracy = stats.answers > 0 ? Math.round((100 * stats.correct) / stats.answers) : 0;
+
+  const pick = <T,>(value: T, apply: (v: T) => void) => () => {
+    haptic.selection();
+    apply(value);
+  };
+
   return (
     <Screen
       footer={
-        <button
-          style={primary}
-          onClick={() => {
-            haptic.impact('light');
-            go('question');
-          }}
-        >
-          Играть
-        </button>
+        <div style={{ display: 'grid', gap: 8 }}>
+          <button
+            style={primary}
+            onClick={() => {
+              haptic.impact('light');
+              game.startRound();
+            }}
+          >
+            Играть
+          </button>
+          {game.weak.length > 0 ? (
+            <button style={secondary} onClick={game.startRetryRound}>
+              Повторить ошибки · {game.weak.length}
+            </button>
+          ) : null}
+        </div>
       }
     >
-      <Placeholder title="Столицы" hint="Каркас собран. Экраны наполняются по этапам." />
+      <Placeholder title="Столицы" hint={`Точность ${accuracy}% · серия ${stats.streak}`} />
+
+      <Section title="Режим">
+        {MODES.map((m) => (
+          <Chip
+            key={m}
+            active={settings.mode === m}
+            disabled={m === 'country_to_map'}
+            onClick={pick(m, (mode) => game.changeSettings({ mode }))}
+          >
+            {MODE_LABEL[m]}
+          </Chip>
+        ))}
+      </Section>
+
+      <Section title="Регион">
+        {REGIONS.map((r) => (
+          <Chip
+            key={r}
+            active={settings.region === r}
+            onClick={pick(r, (region) => game.changeSettings({ region }))}
+          >
+            {REGION_LABEL[r]}
+          </Chip>
+        ))}
+      </Section>
+
+      <Section title="Сложность">
+        {DIFFICULTIES.map(([d, text]) => (
+          <Chip
+            key={d}
+            active={settings.difficulty === d}
+            onClick={pick(d, (difficulty) => game.changeSettings({ difficulty }))}
+          >
+            {text}
+          </Chip>
+        ))}
+      </Section>
 
       <div style={{ height: 24 }} />
-
-      <button style={secondary} onClick={() => go('stats')}>
+      <button style={secondary} onClick={openStats}>
         Статистика
       </button>
-
-      <div style={{ height: 28 }} />
-
-      {/* Служебная плашка — видно, что SDK подцепился. Уберётся на этапе 7. */}
-      <div style={debugCard}>
-        <div style={debugLabel}>Среда</div>
-        <div style={debugRow}>
-          <span>Окружение</span>
-          <b>{isTelegram ? 'Telegram' : 'Браузер'}</b>
-        </div>
-        <div style={debugRow}>
-          <span>Платформа</span>
-          <b>{platform}</b>
-        </div>
-        <div style={debugRow}>
-          <span>Bot API</span>
-          <b>{version}</b>
-        </div>
-      </div>
     </Screen>
   );
 }
 
-const primary: CSSProperties = {
-  width: '100%',
-  height: 56,
-  borderRadius: 'var(--r-button)',
-  background: 'var(--c-accent)',
-  color: '#fff',
-  fontSize: 16,
-  fontWeight: 600,
-};
+function Section({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div style={{ marginTop: 24 }}>
+      <div style={label}>{title}</div>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>{children}</div>
+    </div>
+  );
+}
 
-const secondary: CSSProperties = {
-  width: '100%',
-  height: 46,
-  borderRadius: 'var(--r-button)',
-  background: 'var(--c-surface)',
-  border: '1px solid var(--c-line)',
-  color: 'var(--c-ink)',
-  fontSize: 16,
-  fontWeight: 600,
-};
+function Chip({
+  active,
+  disabled,
+  onClick,
+  children,
+}: {
+  active: boolean;
+  disabled?: boolean;
+  onClick: () => void;
+  children: React.ReactNode;
+}) {
+  return (
+    <button
+      disabled={disabled}
+      onClick={onClick}
+      style={{
+        padding: '8px 12px',
+        borderRadius: 'var(--r-chip)',
+        fontSize: 15,
+        fontWeight: 600,
+        background: active ? 'var(--c-accent-bg)' : 'var(--c-surface)',
+        border: `1px solid ${active ? 'var(--c-accent)' : 'var(--c-line)'}`,
+        color: disabled ? 'var(--c-ink-disabled)' : active ? 'var(--c-accent)' : 'var(--c-ink)',
+        opacity: disabled ? 0.6 : 1,
+      }}
+    >
+      {children}
+    </button>
+  );
+}
 
-const debugCard: CSSProperties = {
-  background: 'var(--c-surface)',
-  border: '1px solid var(--c-line)',
-  borderRadius: 'var(--r-card)',
-  padding: 16,
-};
-
-const debugLabel: CSSProperties = {
+const label: CSSProperties = {
   fontSize: 11,
   fontWeight: 600,
   letterSpacing: '.1em',
   textTransform: 'uppercase',
   color: 'var(--c-muted)',
-  marginBottom: 10,
+  marginBottom: 8,
 };
-
-const debugRow: CSSProperties = {
-  display: 'flex',
-  justifyContent: 'space-between',
-  fontSize: 15,
-  padding: '4px 0',
-  color: 'var(--c-ink2)',
+const primary: CSSProperties = {
+  width: '100%', height: 56, borderRadius: 'var(--r-button)',
+  background: 'var(--c-accent)', color: '#fff', fontSize: 16, fontWeight: 600,
+};
+const secondary: CSSProperties = {
+  width: '100%', height: 46, borderRadius: 'var(--r-button)',
+  background: 'var(--c-surface)', border: '1px solid var(--c-line)', fontSize: 16, fontWeight: 600,
 };
