@@ -51,21 +51,7 @@ export function QuestionScreen({ game }: { game: Game }) {
   const subjectEn = q.mode === 'capital_to_country' ? country.capitalEn : country.nameEn;
 
   return (
-    <Screen
-      footer={
-        answered ? (
-          <button
-            style={primary}
-            onClick={() => {
-              haptic.impact('light');
-              game.next();
-            }}
-          >
-            Дальше
-          </button>
-        ) : undefined
-      }
-    >
+    <Screen>
       <RoundProgress current={game.position.current} total={game.position.total} />
 
       {answered && answer ? (
@@ -94,8 +80,10 @@ export function QuestionScreen({ game }: { game: Game }) {
               <Flag code={country.code} size="xl" />
             ) : (
               <>
-                {showsFlag ? <Flag code={country.code} size="lg" /> : null}
-                <FitTitle text={subject} style={{ marginTop: showsFlag ? 14 : 0 }} />
+                {/* Флаг крупный: пустоту над вариантами лучше занять самой страной,
+                    чем воздухом. Место всё равно зарезервировано под карту. */}
+                {showsFlag ? <Flag code={country.code} size="xl" /> : null}
+                <FitTitle text={subject} style={{ marginTop: showsFlag ? 16 : 0 }} />
                 <div style={subtitle}>{subjectEn}</div>
               </>
             )}
@@ -135,6 +123,8 @@ export function QuestionScreen({ game }: { game: Game }) {
         </div>
       ) : null}
 
+      {!onMap && !answered ? <div style={{ flex: 1 }} /> : null}
+
       {!onMap ? (
         <div style={answered ? optionsDone : optionsLive}>
           {q.options.map((option, i) => (
@@ -147,6 +137,22 @@ export function QuestionScreen({ game }: { game: Game }) {
           ))}
         </div>
       ) : null}
+
+      {/* Место под кнопку занято и до ответа. Иначе её появление сдвигает
+          варианты вверх ровно в тот момент, когда игрок на них смотрит. */}
+      <div style={{ ...bottomBar, borderTopColor: answered ? 'var(--c-line)' : 'transparent' }}>
+        {answered ? (
+          <button
+            style={primary}
+            onClick={() => {
+              haptic.impact('light');
+              game.next();
+            }}
+          >
+            Дальше
+          </button>
+        ) : null}
+      </div>
     </Screen>
   );
 }
@@ -334,21 +340,19 @@ const note: CSSProperties = {
 };
 
 /**
- * До ответа список стоит по центру свободной высоты.
+ * Список вариантов стоит внизу и в вопросе, и в разборе — на одном и том же месте.
  *
- * Растягивать сами варианты нельзя: после ответа им приходится ужиматься, чтобы
- * освободить место карте, и скачок высоты в глаза бросается сильнее, чем пустота,
- * ради которой всё затевалось. Поэтому размер у варианта один и тот же всегда,
- * а свободное место просто делится поровну сверху и снизу.
+ * Раньше до ответа он центрировался в свободной высоте, а после ответа его
+ * прижимала вниз появившаяся карта: варианты уезжали на полтораста пикселей
+ * ровно в тот момент, когда на них смотрят. Ни размер, ни положение меняться
+ * не должны; свободная высота уходит вверх, и её же потом занимает карта.
  */
 const optionsLive: CSSProperties = {
   display: 'flex',
   flexDirection: 'column',
   gap: 8,
-  flex: 1,
-  minHeight: 0,
+  flex: '0 0 auto',
   paddingTop: 24,
-  justifyContent: 'center',
 };
 
 const optionsDone: CSSProperties = {
@@ -377,6 +381,15 @@ const option: CSSProperties = {
   fontSize: 17,
   fontWeight: 500,
   transition: 'background-color 120ms linear, border-color 120ms linear, color 120ms linear',
+};
+
+const bottomBar: CSSProperties = {
+  flex: '0 0 auto',
+  height: 56,
+  boxSizing: 'content-box',
+  paddingTop: 12,
+  marginTop: 12,
+  borderTop: '1px solid',
 };
 
 const primary: CSSProperties = {

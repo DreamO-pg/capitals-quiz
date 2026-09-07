@@ -42,7 +42,16 @@ export function useGame(): Game {
   // Для сохранения перед закрытием: эффект не должен зависеть от каждого ответа.
   const progressRef = useRef(progress);
   progressRef.current = progress;
+  const statsRef = useRef(stats);
+  statsRef.current = stats;
+  const answersRef = useRef<Answer[]>(answers);
+  answersRef.current = answers;
   const dirtyRef = useRef(false);
+  /** Ответы текущего раунда уже учтены в статистике — второй раз не считаем. */
+  const countedRef = useRef(true);
+  // Подписка на закрытие окна вешается один раз, до объявления commit,
+  // поэтому зовём его через ref, а не по значению.
+  const commitRef = useRef<(finished: Answer[]) => void>(() => {});
 
   useEffect(() => {
     let alive = true;
@@ -62,6 +71,10 @@ export function useGame(): Game {
   useEffect(
     () =>
       onBeforeClose(() => {
+        if (!countedRef.current) {
+          commitRef.current(answersRef.current);
+          return;
+        }
         if (!dirtyRef.current) return;
         dirtyRef.current = false;
         void saveProgress(progressRef.current);
@@ -79,6 +92,7 @@ export function useGame(): Game {
 
   const begin = useCallback((questions: Question[]) => {
     if (questions.length === 0) return;
+    countedRef.current = false;
     setQueue(questions);
     setIndex(0);
     setAnswers([]);
@@ -120,42 +134,61 @@ export function useGame(): Game {
     [queue, index, phase],
   );
 
-  const finish = useCallback(
+  /**
+   * Учитывает ответы в статистике и записывает всё на диск.
+   *
+   * Вызывается не только на финише раунда, но и при уходе с экрана: раунд,
+   * брошенный на середине, раньше пропадал целиком — игрок отвечал на семь
+   * вопросов, жал «назад» и не находил в статистике ни одного.
+   *
+   * Считает из ref, а не из состояния: перед закрытием окна обновление состояния
+   * может уже не успеть примениться, а записать надо наверняка.
+   */
+  const commit = useCallback(
     (finished: Answer[]) => {
-      const day = today();
-      const correct = finished.filter((a) => a.correct).length;
-
-      setStats((prev) => {
-        const byRegion = { ...prev.byRegion };
-        for (const a of finished) {
-          const r = a.question.country.region;
-          const cell = byRegion[r] ?? { correct: 0, total: 0 };
-          byRegion[r] = { correct: cell.correct + (a.correct ? 1 : 0), total: cell.total + 1 };
-        }
-        const next: Stats = {
-          answers: prev.answers + finished.length,
-          correct: prev.correct + correct,
-          streak: bumpStreak(prev, day),
-          lastPlayDay: day,
-          byRegion,
-          rounds: pushRound(prev, {
-            day,
-            mode: settings.mode,
-            region: settings.region,
-            correct,
-            total: finished.length,
-          }),
-        };
-        void saveStats(next);
-        return next;
-      });
-
-      // Прогресс уже посчитан в состоянии — записываем то, что накопилось за раунд.
+      countedRef.current = true;
       dirtyRef.current = false;
       void saveProgress(progressRef.current);
-      setPhase('result');
+      if (finished.length === 0) return;
+
+      const day = today();
+      const correct = finished.filter((a) => a.correct).length;
+      const prev = statsRef.current;
+      const byRegion = { ...prev.byRegion };
+      for (const a of finished) {
+        const r = a.question.country.region;
+        const cell = byRegion[r] ?? { correct: 0, total: 0 };
+        byRegion[r] = { correct: cell.correct + (a.correct ? 1 : 0), total: cell.total + 1 };
+      }
+      const next: Stats = {
+        answers: prev.answers + finished.length,
+        correct: prev.correct + correct,
+        streak: bumpStreak(prev, day),
+        lastPlayDay: day,
+        byRegion,
+        rounds: pushRound(prev, {
+          day,
+          mode: settings.mode,
+          region: settings.region,
+          correct,
+          total: finished.length,
+        }),
+      };
+      statsRef.current = next;
+      setStats(next);
+      void saveStats(next);
     },
     [settings],
+  );
+
+  commitRef.current = commit;
+
+  const finish = useCallback(
+    (finished: Answer[]) => {
+      commit(finished);
+      setPhase('result');
+    },
+    [commit],
   );
 
   const next = useCallback(() => {
@@ -170,7 +203,8 @@ export function useGame(): Game {
   }, [phase, index, queue.length, answers, finish]);
 
   const goHome = useCallback(() => {
-    if (dirtyRef.current) {
+    if (!countedRef.current) commit(answersRef.current);
+    else if (dirtyRef.current) {
       dirtyRef.current = false;
       void saveProgress(progressRef.current);
     }
