@@ -6,7 +6,8 @@ import { frameFor, inFrame, overlaps } from '../engine/frame';
 import { Globe } from './Globe';
 import { StaticMap } from './StaticMap';
 
-const HEIGHT = 250;
+/** Высота по умолчанию. На экране вопроса карта ниже: там под ней ещё варианты. */
+const DEFAULT_HEIGHT = 250;
 /** Тайлы иногда не приходят по одному — паникуем только на устойчивом отказе. */
 const TILE_ERRORS_BEFORE_FALLBACK = 4;
 
@@ -26,7 +27,15 @@ function loadGeometry(): Promise<Geometry> {
   return geometryPromise;
 }
 
-export function MapCard({ country, wrong }: { country: Country; wrong?: Country | null }) {
+export function MapCard({
+  country,
+  wrong,
+  height = DEFAULT_HEIGHT,
+}: {
+  country: Country;
+  wrong?: Country | null;
+  height?: number;
+}) {
   const [geometry, setGeometry] = useState<Geometry | null>(null);
   const [offline, setOffline] = useState(() => !navigator.onLine);
   const [width, setWidth] = useState(0);
@@ -142,7 +151,7 @@ export function MapCard({ country, wrong }: { country: Country; wrong?: Country 
   }, [country.code, offline, geometry, wrongPoint?.lat, wrongPoint?.lon]);
 
   return (
-    <div ref={box} style={wrapper}>
+    <div ref={box} style={{ ...wrapper, height }}>
       {offline && geometry && width > 0 ? (
         <StaticMap
           frame={frame}
@@ -156,10 +165,10 @@ export function MapCard({ country, wrong }: { country: Country; wrong?: Country 
           lon={country.capitalLon}
           wrong={wrongPoint}
           width={width}
-          height={HEIGHT}
+          height={height}
         />
       ) : (
-        <div ref={host} style={{ height: HEIGHT, background: 'var(--c-sunken)' }} />
+        <div ref={host} style={{ height, background: 'var(--c-sunken)' }} />
       )}
 
       {/* Глобус поверх карты и всегда виден: без него кадр не привязан к планете. */}
@@ -183,7 +192,6 @@ const wrapper: React.CSSProperties = {
   overflow: 'hidden',
   border: '1px solid var(--c-line)',
   background: 'var(--c-sunken)',
-  height: HEIGHT,
 };
 
 // Правый верхний угол: снизу Leaflet рисует свою подпись, и глобус её перекрывал.

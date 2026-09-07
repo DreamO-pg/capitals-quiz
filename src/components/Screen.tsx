@@ -19,7 +19,6 @@ const wrap: CSSProperties = {
   height: '100%',
   minHeight: 0,
   paddingTop: 'var(--tg-inset-top)',
-  // Точка отсчёта для панели итога: она выезжает снизу поверх содержимого.
   position: 'relative',
   overflow: 'hidden',
 };
