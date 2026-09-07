@@ -6,7 +6,7 @@ import { frameFor, inFrame, overlaps } from '../engine/frame';
 import { Globe } from './Globe';
 import { StaticMap } from './StaticMap';
 
-/** Высота по умолчанию. На экране вопроса карта ниже: там под ней ещё варианты. */
+/** Высота по умолчанию, когда её никто не задал явно. */
 const DEFAULT_HEIGHT = 250;
 /** Тайлы иногда не приходят по одному — паникуем только на устойчивом отказе. */
 const TILE_ERRORS_BEFORE_FALLBACK = 4;
@@ -30,15 +30,17 @@ function loadGeometry(): Promise<Geometry> {
 export function MapCard({
   country,
   wrong,
-  height = DEFAULT_HEIGHT,
+  height,
 }: {
   country: Country;
   wrong?: Country | null;
+  /** Не задана — карта растягивается по контейнеру и забирает свободное место. */
   height?: number;
 }) {
   const [geometry, setGeometry] = useState<Geometry | null>(null);
   const [offline, setOffline] = useState(() => !navigator.onLine);
-  const [width, setWidth] = useState(0);
+  // Запасной карте нужны числа: SVG не умеет рисоваться в процентах родителя.
+  const [size, setSize] = useState({ width: 0, height: height ?? DEFAULT_HEIGHT });
   const host = useRef<HTMLDivElement>(null);
   const box = useRef<HTMLDivElement>(null);
 
@@ -59,11 +61,16 @@ export function MapCard({
 
   useEffect(() => {
     if (!box.current) return;
-    const measure = () => setWidth(box.current?.clientWidth ?? 0);
+    const measure = () =>
+      setSize({
+        width: box.current?.clientWidth ?? 0,
+        height: box.current?.clientHeight ?? height ?? DEFAULT_HEIGHT,
+      });
     measure();
-    window.addEventListener('resize', measure);
-    return () => window.removeEventListener('resize', measure);
-  }, []);
+    const observer = new ResizeObserver(measure);
+    observer.observe(box.current);
+    return () => observer.disconnect();
+  }, [height]);
 
   // Leaflet поднимаем только когда сеть есть и геометрия уже приехала.
   useEffect(() => {
@@ -151,8 +158,8 @@ export function MapCard({
   }, [country.code, offline, geometry, wrongPoint?.lat, wrongPoint?.lon]);
 
   return (
-    <div ref={box} style={{ ...wrapper, height }}>
-      {offline && geometry && width > 0 ? (
+    <div ref={box} style={{ ...wrapper, ...(height ? { height } : { flex: '1 0 auto', minHeight: 160 }) }}>
+      {offline && geometry && size.width > 0 ? (
         <StaticMap
           frame={frame}
           nearby={COUNTRIES.filter(
@@ -164,11 +171,11 @@ export function MapCard({
           lat={country.capitalLat}
           lon={country.capitalLon}
           wrong={wrongPoint}
-          width={width}
-          height={height}
+          width={size.width}
+          height={size.height}
         />
       ) : (
-        <div ref={host} style={{ height, background: 'var(--c-sunken)' }} />
+        <div ref={host} style={{ height: '100%', background: 'var(--c-sunken)' }} />
       )}
 
       {/* Глобус поверх карты и всегда виден: без него кадр не привязан к планете. */}

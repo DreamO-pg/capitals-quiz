@@ -1,4 +1,6 @@
+import { useCallback, useEffect, useRef, useState } from 'react';
 import type { CSSProperties } from 'react';
+import { FitTitle } from '../components/FitTitle';
 import { Flag } from '../components/Flag';
 import { IconCheck, IconCross } from '../components/icons';
 import { MapCard } from '../components/MapCard';
@@ -93,7 +95,7 @@ export function QuestionScreen({ game }: { game: Game }) {
             ) : (
               <>
                 {showsFlag ? <Flag code={country.code} size="lg" /> : null}
-                <h1 style={{ ...title, marginTop: showsFlag ? 14 : 0 }}>{subject}</h1>
+                <FitTitle text={subject} style={{ marginTop: showsFlag ? 14 : 0 }} />
                 <div style={subtitle}>{subjectEn}</div>
               </>
             )}
@@ -114,17 +116,16 @@ export function QuestionScreen({ game }: { game: Game }) {
           />
         </div>
       ) : answered ? (
-        <div style={middle}>
+        <ScrollArea>
           <div style={mapSlot}>
             <MapCard
               country={country}
               wrong={answer && !answer.correct ? q.optionCountries[answer.chosenIndex] : null}
-              height={200}
             />
           </div>
           <div style={context}>{contextLine(country)}</div>
           {country.note ? <p style={note}>{country.note}</p> : null}
-        </div>
+        </ScrollArea>
       ) : null}
 
       {onMap && answered ? (
@@ -141,13 +142,49 @@ export function QuestionScreen({ game }: { game: Game }) {
               key={`${game.position.current}-${option}`}
               text={option}
               state={optionState(i, chosen, q.correctIndex)}
-              stretch={!answered}
               onClick={() => choose(i)}
             />
           ))}
         </div>
       ) : null}
     </Screen>
+  );
+}
+
+/**
+ * Прокручиваемая середина экрана с подсказкой, что ниже есть продолжение.
+ *
+ * Место после ответа кончается: карта, контекст, пояснение и четыре варианта
+ * на невысоком экране разом не помещаются. Обрезать пояснение молча нельзя —
+ * текст, оборванный на полуслове, читается как поломка, а не как «прокрути».
+ */
+function ScrollArea({ children }: { children: React.ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [more, setMore] = useState(false);
+
+  const check = useCallback(() => {
+    const el = ref.current;
+    if (!el) return;
+    setMore(el.scrollHeight - el.scrollTop - el.clientHeight > 4);
+  }, []);
+
+  useEffect(() => {
+    check();
+    const el = ref.current;
+    if (!el) return;
+    const observer = new ResizeObserver(check);
+    observer.observe(el);
+    for (const child of Array.from(el.children)) observer.observe(child);
+    return () => observer.disconnect();
+  }, [check, children]);
+
+  return (
+    <div style={scrollWrap}>
+      <div ref={ref} style={middle} onScroll={check}>
+        {children}
+      </div>
+      {more ? <div style={fade} /> : null}
+    </div>
   );
 }
 
@@ -163,12 +200,10 @@ function optionState(index: number, chosen: number | null, correct: number): Opt
 function Option({
   text,
   state,
-  stretch,
   onClick,
 }: {
   text: string;
   state: OptionState;
-  stretch: boolean;
   onClick: () => void;
 }) {
   const look = LOOK[state];
@@ -178,11 +213,6 @@ function Option({
       disabled={state !== 'idle'}
       style={{
         ...option,
-        // До ответа варианты делят свободную высоту: иначе на высоком экране
-        // между вопросом и ними висит добрая треть пустого места.
-        flex: stretch ? '1 1 0' : '0 0 auto',
-        minHeight: stretch ? 56 : 46,
-        maxHeight: stretch ? 72 : undefined,
         background: look.background,
         borderColor: look.border,
         color: look.color,
@@ -216,6 +246,25 @@ const LOOK: Record<OptionState, { background: string; border: string; color: str
 
 const head: CSSProperties = { flex: '0 0 auto' };
 
+const scrollWrap: CSSProperties = {
+  position: 'relative',
+  flex: 1,
+  minHeight: 0,
+  display: 'flex',
+  flexDirection: 'column',
+};
+
+/** Мягкий край: показывает, что содержимое продолжается, без полосы прокрутки. */
+const fade: CSSProperties = {
+  position: 'absolute',
+  left: 0,
+  right: 0,
+  bottom: 0,
+  height: 28,
+  pointerEvents: 'none',
+  background: 'linear-gradient(to bottom, rgba(250,249,245,0), var(--c-bg))',
+};
+
 const middle: CSSProperties = {
   flex: 1,
   minHeight: 0,
@@ -227,22 +276,13 @@ const middle: CSSProperties = {
 
 const prompt: CSSProperties = { fontSize: 13, color: 'var(--c-muted)', marginTop: 20 };
 
-const title: CSSProperties = {
-  fontFamily: 'var(--font-display)',
-  fontSize: 46,
-  lineHeight: 1.06,
-  fontWeight: 500,
-  margin: 0,
-  letterSpacing: '-0.01em',
-};
-
 const subtitle: CSSProperties = { fontSize: 15, color: 'var(--c-muted)', marginTop: 6 };
 
 const verdictRow: CSSProperties = {
   display: 'flex',
   alignItems: 'center',
   gap: 10,
-  marginTop: 18,
+  marginTop: 12,
 };
 
 const verdict: CSSProperties = {
@@ -254,6 +294,7 @@ const verdict: CSSProperties = {
 
 const pair: CSSProperties = {
   fontFamily: 'var(--font-display)',
+  overflowWrap: 'anywhere',
   fontSize: 26,
   fontWeight: 500,
   lineHeight: 1.2,
@@ -265,49 +306,57 @@ const pairCapital: CSSProperties = { color: 'var(--c-accent)' };
 const latin: CSSProperties = { fontSize: 13, color: 'var(--c-muted)', marginTop: 4 };
 
 const mapSlot: CSSProperties = {
+  // Карта забирает свободное место, но сжиматься не даёт: иначе на низком экране
+  // она схлопывается в полоску, а контекст и пояснение выдавливаются совсем.
+  // Расти — да, ужиматься — нет, и тогда лишнее честно уходит в прокрутку.
+  display: 'flex',
+  flex: '1 0 160px',
   marginTop: 14,
   animation: 'map-in 220ms cubic-bezier(.2,.7,.3,1) both',
 };
 
 const context: CSSProperties = {
+  flex: '0 0 auto',
   fontSize: 15,
   color: 'var(--c-ink2)',
-  marginTop: 12,
+  marginTop: 10,
   lineHeight: 1.4,
 };
 
 const note: CSSProperties = {
-  fontSize: 15,
+  flex: '0 0 auto',
+  fontSize: 14,
   color: 'var(--c-ink2)',
-  lineHeight: 1.45,
-  margin: '12px 0 0',
-  paddingTop: 12,
+  lineHeight: 1.4,
+  margin: '10px 0 0',
+  paddingTop: 10,
   borderTop: '1px solid var(--c-line)',
 };
 
+/**
+ * До ответа список стоит по центру свободной высоты.
+ *
+ * Растягивать сами варианты нельзя: после ответа им приходится ужиматься, чтобы
+ * освободить место карте, и скачок высоты в глаза бросается сильнее, чем пустота,
+ * ради которой всё затевалось. Поэтому размер у варианта один и тот же всегда,
+ * а свободное место просто делится поровну сверху и снизу.
+ */
 const optionsLive: CSSProperties = {
   display: 'flex',
   flexDirection: 'column',
-  gap: 10,
+  gap: 8,
   flex: 1,
   minHeight: 0,
   paddingTop: 24,
-  // Варианты растягиваются, но не безгранично: строка в сто пикселей высотой
-  // выглядит нелепо. Остаток высоты делим поровну сверху и снизу, чтобы он не
-  // собирался в одну заметную дыру.
   justifyContent: 'center',
 };
 
-/**
- * После ответа список уплотняется: попадать пальцем в него уже не нужно,
- * а освободившиеся пиксели уходят карте и пояснению.
- */
 const optionsDone: CSSProperties = {
   display: 'flex',
   flexDirection: 'column',
-  gap: 6,
+  gap: 8,
   flex: '0 0 auto',
-  paddingTop: 12,
+  paddingTop: 14,
 };
 
 const option: CSSProperties = {
@@ -316,6 +365,11 @@ const option: CSSProperties = {
   justifyContent: 'space-between',
   gap: 12,
   width: '100%',
+  // Один размер до и после ответа: скачок высоты бросается в глаза сильнее,
+  // чем выигранные им пиксели. 52 — компромисс между удобством нажатия и
+  // местом, которое после ответа нужно карте и пояснению.
+  minHeight: 52,
+  flex: '0 0 auto',
   padding: '10px 16px',
   textAlign: 'left',
   border: '1px solid',
