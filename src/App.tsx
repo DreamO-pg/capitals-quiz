@@ -1,5 +1,4 @@
 import { useCallback } from 'react';
-import { AnswerScreen } from './screens/AnswerScreen';
 import { HomeScreen } from './screens/HomeScreen';
 import { QuestionScreen } from './screens/QuestionScreen';
 import { ResultScreen } from './screens/ResultScreen';
@@ -28,10 +27,10 @@ export function App() {
   if (statsOpen) return <StatsScreen game={game} />;
 
   switch (game.phase) {
+    // Вопрос и его итог — один экран: итог выезжает панелью поверх вопроса.
     case 'question':
-      return <QuestionScreen game={game} />;
     case 'answer':
-      return <AnswerScreen game={game} />;
+      return <QuestionScreen game={game} />;
     case 'result':
       return <ResultScreen game={game} />;
     default:

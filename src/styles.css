@@ -143,3 +143,13 @@ h1, h2, h3, p, span, button, li {
     transform: none;
   }
 }
+
+/* Итог выезжает снизу поверх вопроса — переход на отдельный экран не нужен. */
+@keyframes sheet-in {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: none;
+  }
+}

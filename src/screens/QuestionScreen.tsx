@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState, type CSSProperties } from 'react';
+import type { CSSProperties } from 'react';
+import { AnswerSheet } from '../components/AnswerSheet';
 import { Flag } from '../components/Flag';
 import { MapQuestion } from '../components/MapQuestion';
 import { IconCheck, IconCross } from '../components/icons';
@@ -8,34 +9,23 @@ import { haptic } from '../telegram/webapp';
 import type { Mode } from '../types';
 import type { Game } from '../hooks/useGame';
 
-/** Сколько держим подсветку, прежде чем показать разбор. */
-const HIGHLIGHT_MS = 520;
-
 export function QuestionScreen({ game }: { game: Game }) {
   const q = game.question;
-  const [chosen, setChosen] = useState<number | null>(null);
-  const timer = useRef<number | null>(null);
 
-  // Новый вопрос — снимаем подсветку. Ключ — позиция в раунде, а не страна:
-  // повтор той же страны внутри раунда обязан сбросить состояние.
-  useEffect(() => {
-    setChosen(null);
-    return () => {
-      if (timer.current) window.clearTimeout(timer.current);
-    };
-  }, [game.position.current, q?.country.code]);
+  // Своего состояния у экрана нет: что выбрано, знает движок. Иначе после
+  // ответа пришлось бы держать две правды и следить, чтобы они совпадали.
+  const answered = game.phase === 'answer';
+  const chosen = answered ? (game.lastAnswer?.chosenIndex ?? null) : null;
 
   if (!q) return null;
 
-  const answered = chosen !== null;
-
   const choose = (index: number) => {
     if (answered) return;
-    setChosen(index);
-    // Отклик сразу, вместе с подсветкой: задержка тут читается как лаг.
+    // Отклик и переход к итогу без задержки: панель выезжает поверх вопроса,
+    // экран не сменяется, и держать паузу ради подсветки больше незачем.
     if (index === q.correctIndex) haptic.success();
     else haptic.error();
-    timer.current = window.setTimeout(() => game.answer(index), HIGHLIGHT_MS);
+    game.answer(index);
   };
 
   const showsFlag = q.mode === 'country_to_capital' || q.mode === 'country_to_map';
@@ -86,6 +76,10 @@ export function QuestionScreen({ game }: { game: Game }) {
           ))}
         </div>
       )}
+
+      {answered && game.lastAnswer ? (
+        <AnswerSheet answer={game.lastAnswer} onNext={game.next} />
+      ) : null}
     </Screen>
   );
 }
